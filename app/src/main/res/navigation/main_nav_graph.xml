@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/camerasFragment">
+    <fragment
+        android:id="@+id/camerasFragment"
+        android:name="com.crosoften.emnuvem.main.CamerasFragment"
+        android:label="fragment_cameras"
+        tools:layout="@layout/fragment_cameras" >
+        <action
+            android:id="@+id/action_camerasFragment_to_liveCameraFragment"
+            app:destination="@id/liveCameraFragment" />
+        <action
+            android:id="@+id/action_camerasFragment_to_camerasMosaicFragment"
+            app:destination="@id/camerasMosaicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videosFragment"
+        android:name="com.crosoften.emnuvem.main.VideosFragment"
+        android:label="fragment_videos"
+        tools:layout="@layout/fragment_videos" />
+    <fragment
+        android:id="@+id/addCameraFragment"
+        android:name="com.crosoften.emnuvem.main.AddCameraFragment"
+        android:label="fragment_add_camera"
+        tools:layout="@layout/fragment_add_camera" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.crosoften.emnuvem.main.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/liveCameraFragment"
+        android:name="com.crosoften.emnuvem.main.LiveCameraFragment"
+        android:label="fragment_live_camera"
+        tools:layout="@layout/fragment_live_camera" />
+    <fragment
+        android:id="@+id/camerasMosaicFragment"
+        android:name="com.crosoften.emnuvem.main.CamerasMosaicFragment"
+        android:label="fragment_cameras_mosaic"
+        tools:layout="@layout/fragment_cameras_mosaic" >
+        <action
+            android:id="@+id/action_camerasMosaicFragment_to_liveCameraFragment"
+            app:destination="@id/liveCameraFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,93 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.EmNuvem" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+        <item name="android:colorBackground">@color/white</item>
+    </style>
+
+    <style name="Material.EmNuvem.Button.Standard" parent="ThemeOverlay.Material3.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Material.EmNuvem.Button.Light" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="strokeColor">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Material.CardView.EmNuvem" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardBackgroundColor">@color/very_light_gray</item>
+        <item name="cardElevation">8dp</item>
+    </style>
+
+    <style name="Poppins.Bold" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
+    <style name="Poppins.Light" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:fontFamily">@font/poppins_light</item>
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
+    <style name="Poppins.10sp.Regular" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Poppins.12sp.Regular" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Poppins.14sp.Regular" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Poppins.16sp.Bold" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Poppins.14sp.Bold" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ToolbarTitleAppearance" parent="">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize6" parent="">
+        <item name="cornerSize">6%</item>
+    </style>
+
+    <style name="Theme.EmNuvem" parent="Base.Theme.EmNuvem" />
+</resources>

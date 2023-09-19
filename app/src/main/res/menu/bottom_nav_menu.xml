@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/camerasFragment"
+        android:icon="@drawable/cameras_icon"
+        android:title="Câmeras" />
+    <item
+        android:id="@+id/videosFragment"
+        android:icon="@drawable/videos_icon"
+        android:title="Vídeos"/>
+    <item
+        android:id="@+id/addCameraFragment"
+        android:icon="@drawable/add_icon"
+        android:title="Adicionar"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/profile_icon"
+        android:title="Perfil"/>
+
+</menu>

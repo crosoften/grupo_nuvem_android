@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.CamerasFragment"
+    tools:ignore="HardcodedText">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/user_picture"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/profile_picture_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/welcome_text"
+        style="@style/Poppins.12sp.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Seja bem vindo(a)!"
+        app:layout_constraintBottom_toTopOf="@id/username"
+        app:layout_constraintStart_toEndOf="@+id/user_picture"
+        app:layout_constraintTop_toTopOf="@+id/user_picture"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/username"
+        style="@style/Poppins.14sp.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Luciana Gimenes"
+        app:layout_constraintBottom_toBottomOf="@+id/user_picture"
+        app:layout_constraintStart_toEndOf="@+id/user_picture"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/mosaic_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:padding="12dp"
+        android:src="@drawable/mosaic_icon"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/user_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/user_picture" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconDrawable="@drawable/search_icon"
+        app:endIconMode="custom"
+        app:endIconTint="@color/secondary"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_picture">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_layout_background"
+            android:hint="O QUE VOCÊ PROCURA?"
+            android:inputType="text"
+            android:textColor="@color/secondary"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cameras_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        android:orientation="vertical"
+        tools:listitem="@layout/camera_list_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
