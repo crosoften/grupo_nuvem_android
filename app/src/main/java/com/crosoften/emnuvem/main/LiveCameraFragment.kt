@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -34,6 +35,7 @@ class LiveCameraFragment : Fragment() {
         setupRecyclerView()
         setupToolbar()
         setupPlayButton()
+        setupMenu()
         //Mock
         Glide.with(requireContext())
             .load("https://i.imgur.com/pwM4PRr.jpg")
@@ -85,11 +87,33 @@ class LiveCameraFragment : Fragment() {
 
     private fun setupPlayButton() {
         binding.playIcon.setOnClickListener {
-        play = !play
+            play = !play
             if (play) {
                 binding.playIcon.setImageResource(R.drawable.play_icon)
             } else {
                 binding.playIcon.setImageResource(R.drawable.pause_icon)
+            }
+        }
+    }
+
+    private fun setupMenu() {
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.save_video -> {
+                    //Todo()
+                    Toast.makeText(requireContext(), "Em breve...", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.screenshot -> {
+                    //Todo()
+                    Toast.makeText(requireContext(), "Em breve...", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                else -> {
+                    false
+                }
             }
         }
     }

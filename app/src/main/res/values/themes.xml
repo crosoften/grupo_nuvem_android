@@ -89,5 +89,9 @@
         <item name="cornerSize">6%</item>
     </style>
 
+    <style name="Theme.Menu.EmNuvem" parent="">
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
     <style name="Theme.EmNuvem" parent="Base.Theme.EmNuvem" />
 </resources>

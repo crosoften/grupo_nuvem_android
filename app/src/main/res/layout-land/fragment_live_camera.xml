@@ -14,11 +14,14 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:elevation="10dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/arrow_back"
-        app:navigationIconTint="@color/white" />
+        app:navigationIconTint="@color/white"
+        app:menu="@menu/live_camera_menu"
+        android:theme="@style/Theme.Menu.EmNuvem"/>
 
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -37,13 +40,12 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:background="@color/secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/live_camera"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/day"

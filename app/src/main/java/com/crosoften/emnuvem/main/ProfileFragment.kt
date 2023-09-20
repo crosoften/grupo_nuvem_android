@@ -26,6 +26,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         setupExitButton()
+        setupMyDataButton()
     }
 
     override fun onDestroyView() {
@@ -43,6 +44,13 @@ class ProfileFragment : Fragment() {
         binding.exit.setOnClickListener {
         startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
+        }
+    }
+
+    private fun setupMyDataButton() {
+        binding.myData.setOnClickListener {
+            val fragment = MyDataDialogFragment()
+            fragment.show(childFragmentManager, fragment.tag)
         }
     }
 }
