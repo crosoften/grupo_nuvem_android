@@ -12,6 +12,7 @@ import com.crosoften.emnuvem.R
 import com.crosoften.emnuvem.main.MainActivity
 import com.crosoften.emnuvem.databinding.FragmentLoginBinding
 import com.crosoften.emnuvem.model.request.Login
+import com.crosoften.emnuvem.ultils.Preference
 import com.crosoften.emnuvem.ultils.isValidEmail
 import com.crosoften.emnuvem.viewModels.LoginViewModel
 
@@ -19,6 +20,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: LoginViewModel
+    lateinit var preferences : Preference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,7 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        preferences = Preference(binding.root.context)
         return binding.root
     }
 
@@ -40,7 +43,8 @@ class LoginFragment : Fragment() {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
         viewModel.loginSucess.observe(viewLifecycleOwner){
-
+            preferences.saveIdUser(it.user.id)
+            preferences.saveToken(it.token)
             Toast.makeText(requireContext(), "login realizado com sucesso", Toast.LENGTH_SHORT).show()
             startActivity(Intent(requireContext(), MainActivity::class.java))
                requireActivity().finish()

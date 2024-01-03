@@ -74,6 +74,16 @@ class Preference {
         editor.apply()
     }
 
+    fun saveIdUser(id: Int){
+        editor.putInt(KEY_ID_USER, id)
+        editor.commit()
+        editor.apply()
+    }
+    fun saveToken(token: String){
+        editor.putString(KEY_TOKEN, token)
+        editor.commit()
+        editor.apply()
+    }
     fun saveIdAddress(id: Int){
         editor.putInt(KEY_ID_ADDRESS, id)
         editor.commit()

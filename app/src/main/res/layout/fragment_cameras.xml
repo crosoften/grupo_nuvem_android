@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="Luciana Gimenes"
+        android:text="Eliane Letícia"
         app:layout_constraintBottom_toBottomOf="@+id/user_picture"
         app:layout_constraintStart_toEndOf="@+id/user_picture"
         app:layout_constraintTop_toBottomOf="@+id/welcome_text" />

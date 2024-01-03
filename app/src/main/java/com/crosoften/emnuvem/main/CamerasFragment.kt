@@ -10,6 +10,7 @@ import com.crosoften.emnuvem.adapters.CameraListAdapter
 import com.crosoften.emnuvem.databinding.FragmentCamerasBinding
 import com.crosoften.emnuvem.listeners.OnCameraClickListener
 import com.crosoften.emnuvem.mock.mockCameras
+import com.crosoften.emnuvem.ultils.Preference
 
 class CamerasFragment : Fragment() {
     private var _binding: FragmentCamerasBinding? = null
