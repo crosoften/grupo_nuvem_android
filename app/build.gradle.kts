@@ -70,7 +70,9 @@ dependencies {
     implementation ("io.insert-koin:koin-android:$koinAndroidVersion")
     implementation ("io.insert-koin:koin-androidx-navigation:$koinAndroidVersion")
 
-    //Retrofit
+    // Retrofit
+    implementation ("com.google.code.gson:gson:$retrofitVersion")
     implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.4.0")
     implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 }

@@ -10,7 +10,7 @@ import com.crosoften.emnuvem.application.EmNuvem
 import com.crosoften.emnuvem.databinding.CameraMosaicItemBinding
 import com.crosoften.emnuvem.listeners.OnCameraClickListener
 import com.crosoften.emnuvem.model.CameraModel
-import com.crosoften.emnuvem.utils.calculateScreenWidth
+import com.crosoften.emnuvem.ultils.calculateScreenWidth
 
 class CameraMosaicAdapter : RecyclerView.Adapter<CameraMosaicAdapter.ViewHolder>() {
 
