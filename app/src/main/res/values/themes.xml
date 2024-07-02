@@ -40,6 +40,23 @@
         <item name="android:textColor">@color/secondary</item>
     </style>
 
+    <style name="TextInputLayoutStyle2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="errorEnabled">true</item>
+        <item name="android:textSize">27sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="hintTextColor">@color/black</item>
+    </style>
+    <style name="Material.RacaoPro.Button.Standard" parent="ThemeOverlay.Material3.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
     <style name="Poppins.Light" parent="ThemeOverlay.Material3.TextInputEditText">
         <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:textColor">@color/secondary</item>

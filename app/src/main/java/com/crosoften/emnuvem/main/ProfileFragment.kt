@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.crosoften.emnuvem.R
 import com.crosoften.emnuvem.databinding.FragmentProfileBinding
 import com.crosoften.emnuvem.login.LoginActivity
 
@@ -45,6 +47,19 @@ class ProfileFragment : Fragment() {
         startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
         }
+        binding.helpCenter.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_securityFragment)
+        }
+        binding.termsOfUse.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_termsFragment)
+        }
+        binding.privacyPolicy.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_politicFragment)
+        }
+        binding.contact.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_contactFragment)
+        }
+
     }
 
     private fun setupMyDataButton() {

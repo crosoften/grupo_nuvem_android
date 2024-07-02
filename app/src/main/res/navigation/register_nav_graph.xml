@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_nav_graph"
+    app:startDestination="@id/registerDataFragment">
+
+    <fragment
+        android:id="@+id/registerDataFragment"
+        android:name="com.crosoften.emnuvem.RegisterDataFragment"
+        android:label="fragment_register_data"
+        tools:layout="@layout/fragment_register_data" >
+        <action
+            android:id="@+id/action_registerDataFragment_to_registerAdressFragment"
+            app:destination="@id/registerAdressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAdressFragment"
+        android:name="com.crosoften.emnuvem.RegisterAdressFragment"
+        android:label="fragment_register_adress"
+        tools:layout="@layout/fragment_register_adress" >
+        <action
+            android:id="@+id/action_registerAdressFragment_to_registerCodeFragment"
+            app:destination="@id/registerCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerCodeFragment"
+        android:name="com.crosoften.emnuvem.RegisterCodeFragment"
+        android:label="fragment_register_code"
+        tools:layout="@layout/fragment_register_code" >
+        <action
+            android:id="@+id/action_registerCodeFragment_to_registerPasswordFragment"
+            app:destination="@id/registerPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerPasswordFragment"
+        android:name="com.crosoften.emnuvem.RegisterPasswordFragment"
+        android:label="fragment_register_password"
+        tools:layout="@layout/fragment_register_password" />
+</navigation>

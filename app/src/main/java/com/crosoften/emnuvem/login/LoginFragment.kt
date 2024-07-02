@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.crosoften.emnuvem.R
+import com.crosoften.emnuvem.RegisterActivity
 import com.crosoften.emnuvem.main.MainActivity
 import com.crosoften.emnuvem.databinding.FragmentLoginBinding
 import com.crosoften.emnuvem.model.request.Login
@@ -58,7 +60,16 @@ class LoginFragment : Fragment() {
 
     private fun setupLoginButton() {
         binding.loginButton.setOnClickListener {
-            validation()
+           // validation()
+            startActivity(Intent(requireContext(), MainActivity::class.java))
+            requireActivity().finish()
+        }
+        binding.registerButton.setOnClickListener {
+            startActivity(Intent(requireContext(), RegisterActivity::class.java))
+            requireActivity().finish()
+        }
+        binding.forgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_recoverEmailFragment)
         }
     }
     private fun validation(){

@@ -74,8 +74,8 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical"
-                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/username">
 
@@ -83,12 +83,12 @@
                     android:id="@+id/my_data"
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
+                    android:layout_marginHorizontal="20dp"
                     android:background="@drawable/input_layout_background"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
                     android:paddingHorizontal="20dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -140,13 +140,13 @@
                     android:id="@+id/terms_of_use"
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/input_layout_background"
                     android:clickable="true"
-                    android:layout_marginTop="12dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
                     android:paddingHorizontal="20dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -169,13 +169,13 @@
                     android:id="@+id/privacy_policy"
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/input_layout_background"
                     android:clickable="true"
-                    android:layout_marginTop="12dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
                     android:paddingHorizontal="20dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -198,13 +198,13 @@
                     android:id="@+id/contact"
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/input_layout_background"
                     android:clickable="true"
-                    android:layout_marginTop="12dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
                     android:paddingHorizontal="20dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -227,13 +227,13 @@
                     android:id="@+id/exit"
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/input_layout_background"
                     android:clickable="true"
-                    android:layout_marginTop="12dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:layout_marginHorizontal="20dp"
                     android:paddingHorizontal="20dp">
 
                     <com.google.android.material.imageview.ShapeableImageView

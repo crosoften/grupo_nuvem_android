@@ -40,7 +40,7 @@ object Constants {
 
     //HTTP
     const val HTTP_SUCCESS = 200
-    const val BASE_URL = "http://52.206.10.145:8080/"
+    const val BASE_URL = "https://06d3-167-250-186-189.ngrok-free.app/"
     const val BASE_NGROK = "https://b43e-2804-d45-9d0d-9e00-456e-d746-af1-1de6.ngrok-free.app/"
 
 }

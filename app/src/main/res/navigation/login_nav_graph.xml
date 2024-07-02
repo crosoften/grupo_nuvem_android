@@ -9,5 +9,36 @@
         android:id="@+id/loginFragment"
         android:name="com.crosoften.emnuvem.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_recoverEmailFragment"
+            app:destination="@id/recoverEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recoverEmailFragment"
+        android:name="com.crosoften.emnuvem.RecoverEmailFragment"
+        android:label="fragment_recover_email"
+        tools:layout="@layout/fragment_recover_email" >
+        <action
+            android:id="@+id/action_recoverEmailFragment_to_recoverCodeFragment"
+            app:destination="@id/recoverCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recoverCodeFragment"
+        android:name="com.crosoften.emnuvem.RecoverCodeFragment"
+        android:label="fragment_recover_code"
+        tools:layout="@layout/fragment_recover_code" >
+        <action
+            android:id="@+id/action_recoverCodeFragment_to_recoverPassWordFragment"
+            app:destination="@id/recoverPassWordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recoverPassWordFragment"
+        android:name="com.crosoften.emnuvem.RecoverPassWordFragment"
+        android:label="fragment_recover_pass_word"
+        tools:layout="@layout/fragment_recover_pass_word" >
+        <argument
+            android:name="code"
+            app:argType="string" />
+    </fragment>
 </navigation>

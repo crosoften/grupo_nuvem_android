@@ -30,7 +30,23 @@
         android:id="@+id/profileFragment"
         android:name="com.crosoften.emnuvem.main.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_sobreFragment"
+            app:destination="@id/sobreFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_politicFragment"
+            app:destination="@id/politicFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_securityFragment"
+            app:destination="@id/securityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/liveCameraFragment"
         android:name="com.crosoften.emnuvem.main.LiveCameraFragment"
@@ -45,4 +61,29 @@
             android:id="@+id/action_camerasMosaicFragment_to_liveCameraFragment"
             app:destination="@id/liveCameraFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/sobreFragment"
+        android:name="com.crosoften.emnuvem.SobreFragment"
+        android:label="fragment_sobre"
+        tools:layout="@layout/fragment_sobre" />
+    <fragment
+        android:id="@+id/politicFragment"
+        android:name="com.crosoften.emnuvem.PoliticFragment"
+        android:label="fragment_politic"
+        tools:layout="@layout/fragment_politic" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.crosoften.emnuvem.TermsFragment"
+        android:label="fragment_terms"
+        tools:layout="@layout/fragment_terms" />
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.crosoften.emnuvem.ContactFragment"
+        android:label="fragment_contact"
+        tools:layout="@layout/fragment_contact" />
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="com.crosoften.emnuvem.SecurityFragment"
+        android:label="fragment_security"
+        tools:layout="@layout/fragment_security" />
 </navigation>

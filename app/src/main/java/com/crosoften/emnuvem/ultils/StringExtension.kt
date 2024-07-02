@@ -14,6 +14,9 @@ fun String.isStrongPassword(): Boolean {
     return (this.length >= 6)
 }
 
+fun String?.notString(): Boolean {
+    return !this.isNullOrEmpty()
+}
 fun String.isValidZipCode(): Boolean {
     return (this.length == 9)
 }

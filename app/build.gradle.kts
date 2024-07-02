@@ -42,6 +42,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.activity:activity:1.8.0")
     val koinAndroidVersion = "3.4.2"
     val navigationVersion = "2.7.2"
     val lifecycleVersion = "2.6.2"

@@ -73,14 +73,25 @@ class AddCameraFragment : Fragment() {
         val desc = binding.description.text.toString()
 
         if (ip.isEmpty()){
-            Toast.makeText(requireContext(), "digite o ip", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(requireContext(), "digite o ip", Toast.LENGTH_SHORT).show()
+            binding.internIpEdit.error = "digite o ip"
+        }else{
+            binding.internIpEdit.error = null
         }
 
         if (serie.isEmpty()){
-            Toast.makeText(requireContext(), "digite o numero de serie", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(requireContext(), "digite o numero de serie", Toast.LENGTH_SHORT).show()
+            binding.serie.error = "digite o numero de serie"
+        }else{
+            binding.serie.error = null
         }
+
         if (cam.isEmpty()){
-            Toast.makeText(requireContext(), "digite a camera", Toast.LENGTH_SHORT).show()
+
+          //  Toast.makeText(requireContext(), "digite a camera", Toast.LENGTH_SHORT).show()
+            binding.camera.error = "digite a camera"
+        }else{
+            binding.camera.error = null
         }
 
         if (password.isEmpty()){
@@ -98,17 +109,25 @@ class AddCameraFragment : Fragment() {
         }
 
         if (nome.isEmpty()){
-            Toast.makeText(requireContext(), "digite o nome", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(requireContext(), "digite o nome", Toast.LENGTH_SHORT).show()
+            binding.name.error = "digite sua senha atual"
+
+        }else{
+            binding.name.error = null
         }
 
         if (desc.isEmpty()){
-            Toast.makeText(requireContext(), "digite uma Descrição", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(requireContext(), "digite uma Descrição", Toast.LENGTH_SHORT).show()
+            binding.description.error = "digite uma Descrição"
+
+        }else{
+            binding.description.error = null
         }
 
 
 
-        if ( ip.isNotEmpty() && serie.isNotEmpty() && cam.isNotEmpty() && binding.password.error.isNullOrEmpty()
-            && binding.currentPassword.error.isNullOrEmpty() && nome.isNotEmpty() && desc.isNotEmpty() ){
+        if ( binding.internIpEdit.error.isNullOrEmpty() && binding.serie.error.isNullOrEmpty() && binding.camera.error.isNullOrEmpty() && binding.password.error.isNullOrEmpty()
+            && binding.currentPassword.error.isNullOrEmpty() &&  binding.name.error.isNullOrEmpty() &&  binding.description.error.isNullOrEmpty() ){
             viewModel.login(
                 AddCamRequest(
                     cam ,
