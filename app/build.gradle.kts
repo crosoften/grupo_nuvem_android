@@ -42,19 +42,19 @@ android {
 
 dependencies {
 
-    implementation("androidx.activity:activity:1.8.0")
-    val koinAndroidVersion = "3.4.2"
-    val navigationVersion = "2.7.2"
-    val lifecycleVersion = "2.6.2"
-    val retrofitVersion = "2.9.0"
+    implementation("androidx.activity:activity-ktx:1.9.3")
+    val koinAndroidVersion = "3.5.6"
+    val navigationVersion = "2.8.3"
+    val lifecycleVersion = "2.8.6"
+    val retrofitVersion = "2.11.0"
 
-    implementation ("androidx.core:core-ktx:1.12.0")
-    implementation ("androidx.appcompat:appcompat:1.6.1")
-    implementation ("com.google.android.material:material:1.9.0")
+    implementation ("androidx.core:core-ktx:1.13.1")
+    implementation ("androidx.appcompat:appcompat:1.7.0")
+    implementation ("com.google.android.material:material:1.12.0")
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.6.1")
 
     //Navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
@@ -65,7 +65,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
     //Glide
-    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
     //Koin
     implementation ("io.insert-koin:koin-android:$koinAndroidVersion")
@@ -76,4 +76,6 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation ("com.squareup.retrofit2:adapter-rxjava2:2.4.0")
     implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.github.chuckerteam.chucker:library:4.0.0")
+
 }

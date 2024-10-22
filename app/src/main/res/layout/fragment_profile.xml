@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:ignore="HardcodedText"
     android:orientation="vertical"
-    tools:context=".main.ProfileFragment">
+    tools:context=".ui.fragment.main.ProfileFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

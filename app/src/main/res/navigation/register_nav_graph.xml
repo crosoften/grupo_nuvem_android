@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registerDataFragment"
-        android:name="com.crosoften.emnuvem.RegisterDataFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.auth.register.RegisterDataFragment"
         android:label="fragment_register_data"
         tools:layout="@layout/fragment_register_data" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerAdressFragment"
-        android:name="com.crosoften.emnuvem.RegisterAdressFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.auth.register.RegisterAdressFragment"
         android:label="fragment_register_adress"
         tools:layout="@layout/fragment_register_adress" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerCodeFragment"
-        android:name="com.crosoften.emnuvem.RegisterCodeFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.auth.register.RegisterCodeFragment"
         android:label="fragment_register_code"
         tools:layout="@layout/fragment_register_code" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerPasswordFragment"
-        android:name="com.crosoften.emnuvem.RegisterPasswordFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.auth.register.RegisterPasswordFragment"
         android:label="fragment_register_password"
         tools:layout="@layout/fragment_register_password" />
 </navigation>

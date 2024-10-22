@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".main.AddCameraFragment">
+    tools:context=".ui.fragment.main.AddCameraFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

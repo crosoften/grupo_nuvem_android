@@ -1,6 +1,6 @@
 package com.crosoften.emnuvem.ultils
 
-import com.crosoften.emnuvem.model.ErrorResponse
+import com.crosoften.emnuvem.data.model.ErrorResponse
 import com.google.gson.Gson
 import retrofit2.Response
 import java.io.IOException

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecoverPassWordFragment">
+    tools:context=".ui.fragment.auth.recover.RecoverPassWordFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/sign_up_toolbar_app"

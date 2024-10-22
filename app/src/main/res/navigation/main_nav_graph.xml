@@ -6,7 +6,7 @@
     app:startDestination="@id/camerasFragment">
     <fragment
         android:id="@+id/camerasFragment"
-        android:name="com.crosoften.emnuvem.main.CamerasFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.main.CamerasFragment"
         android:label="fragment_cameras"
         tools:layout="@layout/fragment_cameras" >
         <action
@@ -18,17 +18,17 @@
     </fragment>
     <fragment
         android:id="@+id/videosFragment"
-        android:name="com.crosoften.emnuvem.main.VideosFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.main.VideosFragment"
         android:label="fragment_videos"
         tools:layout="@layout/fragment_videos" />
     <fragment
         android:id="@+id/addCameraFragment"
-        android:name="com.crosoften.emnuvem.main.AddCameraFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.main.AddCameraFragment"
         android:label="fragment_add_camera"
         tools:layout="@layout/fragment_add_camera" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.crosoften.emnuvem.main.ProfileFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.main.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
@@ -49,12 +49,12 @@
     </fragment>
     <fragment
         android:id="@+id/liveCameraFragment"
-        android:name="com.crosoften.emnuvem.main.LiveCameraFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.main.LiveCameraFragment"
         android:label="fragment_live_camera"
         tools:layout="@layout/fragment_live_camera" />
     <fragment
         android:id="@+id/camerasMosaicFragment"
-        android:name="com.crosoften.emnuvem.main.CamerasMosaicFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.main.CamerasMosaicFragment"
         android:label="fragment_cameras_mosaic"
         tools:layout="@layout/fragment_cameras_mosaic" >
         <action
@@ -63,27 +63,27 @@
     </fragment>
     <fragment
         android:id="@+id/sobreFragment"
-        android:name="com.crosoften.emnuvem.SobreFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.about.SobreFragment"
         android:label="fragment_sobre"
         tools:layout="@layout/fragment_sobre" />
     <fragment
         android:id="@+id/politicFragment"
-        android:name="com.crosoften.emnuvem.PoliticFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.politic.PoliticFragment"
         android:label="fragment_politic"
         tools:layout="@layout/fragment_politic" />
     <fragment
         android:id="@+id/termsFragment"
-        android:name="com.crosoften.emnuvem.TermsFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.terms.TermsFragment"
         android:label="fragment_terms"
         tools:layout="@layout/fragment_terms" />
     <fragment
         android:id="@+id/contactFragment"
-        android:name="com.crosoften.emnuvem.ContactFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.contact.ContactFragment"
         android:label="fragment_contact"
         tools:layout="@layout/fragment_contact" />
     <fragment
         android:id="@+id/securityFragment"
-        android:name="com.crosoften.emnuvem.SecurityFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.security.SecurityFragment"
         android:label="fragment_security"
         tools:layout="@layout/fragment_security" />
 </navigation>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.crosoften.emnuvem.login.LoginFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.auth.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/recoverEmailFragment"
-        android:name="com.crosoften.emnuvem.RecoverEmailFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.auth.recover.RecoverEmailFragment"
         android:label="fragment_recover_email"
         tools:layout="@layout/fragment_recover_email" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/recoverCodeFragment"
-        android:name="com.crosoften.emnuvem.RecoverCodeFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.auth.recover.RecoverCodeFragment"
         android:label="fragment_recover_code"
         tools:layout="@layout/fragment_recover_code" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/recoverPassWordFragment"
-        android:name="com.crosoften.emnuvem.RecoverPassWordFragment"
+        android:name="com.crosoften.emnuvem.ui.fragment.auth.recover.RecoverPassWordFragment"
         android:label="fragment_recover_pass_word"
         tools:layout="@layout/fragment_recover_pass_word" >
         <argument

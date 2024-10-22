@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecoverEmailFragment">
+    tools:context=".ui.fragment.auth.recover.RecoverEmailFragment">
 
 
     <com.google.android.material.appbar.MaterialToolbar
