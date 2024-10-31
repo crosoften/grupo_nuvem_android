@@ -11,7 +11,9 @@
         tools:layout="@layout/fragment_cameras" >
         <action
             android:id="@+id/action_camerasFragment_to_liveCameraFragment"
-            app:destination="@id/liveCameraFragment" />
+            app:destination="@id/liveCameraFragment" >
+            <argument android:name="cameraIP" app:argType="string" />
+        </action>
         <action
             android:id="@+id/action_camerasFragment_to_camerasMosaicFragment"
             app:destination="@id/camerasMosaicFragment" />

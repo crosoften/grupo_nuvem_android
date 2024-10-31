@@ -1,4 +1,4 @@
-package com.crosoften.emnuvem.ui.fragment.main
+package com.crosoften.emnuvem.ui.activity.main
 
 import android.os.Bundle
 import android.view.View

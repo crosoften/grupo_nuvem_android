@@ -1,24 +1,42 @@
 package com.crosoften.emnuvem.ui.fragment.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.GridLayoutManager
 import com.crosoften.emnuvem.R
-import com.crosoften.emnuvem.ui.adapters.CameraPointAdapter
+import com.crosoften.emnuvem.data.model.CameraModel
+import com.crosoften.emnuvem.data.model.response.getCameras.Camera
+import com.crosoften.emnuvem.data.model.state.UiState
 import com.crosoften.emnuvem.databinding.FragmentLiveCameraBinding
+import com.crosoften.emnuvem.ui.adapters.CameraMosaicAdapter
+import com.crosoften.emnuvem.ui.adapters.CameraPointAdapter
+import com.crosoften.emnuvem.ui.listeners.OnCameraClickListener
+import com.crosoften.emnuvem.ultils.extensions.showError
+import com.crosoften.emnuvem.viewModel.CamerasViewModel
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LiveCameraFragment : Fragment() {
     private var _binding: FragmentLiveCameraBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: CameraPointAdapter
+    private val viewModel by viewModel<CamerasViewModel>()
     private var play = true
+    private lateinit var player: ExoPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,25 +48,60 @@ class LiveCameraFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
+        val ip = arguments?.getString("cameraIP")
+        Log.i("IpCamera", "onViewCreated: $ip")
+        if (ip != null) setupPlayer(ip)
+
+        lifecycleScope.launch {
+            viewModel.state.collect { state ->
+                when(state){
+                    is UiState.Error -> showError(state.message)
+                    is UiState.Success -> {
+                        setupRecyclerView(state.data.cameras)
+                    }
+                    else -> {}
+                }
+            }
+        }
+
         setupToolbar()
         setupPlayButton()
         setupMenu()
-        //Mock
-        Glide.with(requireContext())
-            .load("https://i.imgur.com/pwM4PRr.jpg")
-            .optionalCenterCrop()
-            .into(binding.liveCamera)
+
+        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, false)
+        WindowInsetsControllerCompat(requireActivity().window,
+        requireActivity().window.decorView).isAppearanceLightStatusBars = false
+    }
+
+    private fun setupPlayer(ip: String) {
+        player = ExoPlayer.Builder(requireContext()).build()
+        binding.videoView?.player = player
+
+        val url = "rtsp://201.35.17.41:554"
+//        val url = "rtsp://177.129.147.4:554"
+        val mediaItem = MediaItem.fromUri(ip.lowercase())
+        player.setMediaItem(mediaItem)
+
+        player.addListener(object : Player.Listener {
+            override fun onPlayerError(error: PlaybackException) {
+                super.onPlayerError(error)
+                Log.e("ExoPlayerLog", "Error: ${error.message}")
+            }
+        })
+        player.prepare()
+        player.play()
     }
 
     override fun onResume() {
         super.onResume()
-        setupStatusBar()
+
+        viewModel.loadCameras()
+//        setupStatusBar()
     }
 
     override fun onPause() {
         super.onPause()
-        resetStatusBar()
+//        resetStatusBar()
     }
 
     override fun onDestroyView() {
@@ -71,10 +124,30 @@ class LiveCameraFragment : Fragment() {
             .isAppearanceLightStatusBars = true
     }
 
-    private fun setupRecyclerView() {
-        adapter = CameraPointAdapter()
+    private fun setupRecyclerView(cameras: List<Camera>) {
+        val adapter = CameraMosaicAdapter(requireContext())
         binding.recycler.adapter = adapter
-        adapter.updateList(emptyList())
+        binding.recycler.layoutManager = GridLayoutManager(requireContext(), 3)
+
+        val list = mutableListOf<CameraModel>()
+        cameras.forEach{
+            list.add(
+                CameraModel(
+                    ip = it.ip,
+                    name = it.name,
+                    address = it.description,
+                    picture = ""
+                )
+            )
+        }
+
+        adapter.updateList(list)
+        adapter.setListener(object : OnCameraClickListener {
+            override fun onClick(item: CameraModel) {
+//                findNavController().navigate(CamerasMosaicFragmentDirections.actionCamerasMosaicFragmentToLiveCameraFragment())
+                setupPlayer(item.ip)
+            }
+        })
     }
 
     private fun setupToolbar() {
@@ -96,7 +169,7 @@ class LiveCameraFragment : Fragment() {
 
     private fun setupMenu() {
         binding.toolbar.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.save_video -> {
                     //Todo()
                     Toast.makeText(requireContext(), "Em breve...", Toast.LENGTH_SHORT).show()

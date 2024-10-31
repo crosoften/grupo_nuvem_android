@@ -1,5 +1,5 @@
 package com.crosoften.emnuvem.data.model.request.forgotOne
 
-data class ForgotOneRequest(
+data class ForgotPasswordRequest(
     val email: String
 )

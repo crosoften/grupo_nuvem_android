@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.auth.register.RegisterAdressFragment">
+    tools:context=".ui.fragment.auth.register.RegisterAddressFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -93,7 +93,7 @@
                 app:layout_constraintTop_toBottomOf="@id/nome_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_nome"
+                    android:id="@+id/edit_street"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
@@ -130,13 +130,13 @@
                 app:layout_constraintTop_toBottomOf="@id/nome_tv3">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_nome3"
+                    android:id="@+id/edit_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
                     android:hint="00"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:lines="1"
                     android:textSize="14sp" />
 
@@ -168,13 +168,13 @@
                 app:layout_constraintTop_toBottomOf="@id/nome_tv4">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_nome4"
+                    android:id="@+id/edit_district"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
                     android:hint="Exemplo Preenchido"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:lines="1"
                     android:textSize="14sp" />
 
@@ -205,13 +205,13 @@
                 app:layout_constraintTop_toBottomOf="@id/cpf_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cpf_email"
+                    android:id="@+id/edit_zip_code"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
                     android:hint="Exemplo Preenchido"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:lines="1"
                     android:textSize="14sp" />
 
@@ -241,13 +241,13 @@
                 app:layout_constraintTop_toBottomOf="@id/email_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_email"
+                    android:id="@+id/edit_city"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
                     android:hint="Exemplo Preenchido"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:lines="1"
                     android:textSize="14sp" />
 
@@ -277,13 +277,13 @@
                 app:layout_constraintTop_toBottomOf="@id/telefone_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/telefone_email"
+                    android:id="@+id/edit_state"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
                     android:hint="Exemplo Preenchido"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:lines="1"
                     android:textSize="14sp" />
 

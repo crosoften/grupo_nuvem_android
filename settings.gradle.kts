@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Em Nuvem"
 include(":app")
- 

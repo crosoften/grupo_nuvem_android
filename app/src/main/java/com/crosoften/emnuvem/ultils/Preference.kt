@@ -108,4 +108,16 @@ class Preference {
         editor.clear()
         editor.commit()
     }
+
+    fun saveUserName(name: String) {
+        editor.putString(KEY_NAME, name)
+        editor.commit()
+        editor.apply()
+    }
+
+    fun saveUserImage(image: String) {
+        editor.putString(KEY_IMAGE, image)
+        editor.commit()
+        editor.apply()
+    }
 }

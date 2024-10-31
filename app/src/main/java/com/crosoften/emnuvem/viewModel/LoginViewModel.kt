@@ -1,37 +1,34 @@
 package com.crosoften.emnuvem.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.crosoften.emnuvem.data.model.request.Login
 import com.crosoften.emnuvem.data.model.response.loginResponse.LoginResponse
-import com.crosoften.emnuvem.data.repository.LoginRepository
-import com.crosoften.emnuvem.ultils.ResponseParser
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.crosoften.emnuvem.data.model.state.UiState
+import com.crosoften.emnuvem.data.repository.AuthRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 class LoginViewModel (
-    private val loginRepository: LoginRepository
+    private val authRepository: AuthRepository
 ) : ViewModel() {
-    val loginSucess = MutableLiveData<LoginResponse>()
-    val loginError = MutableLiveData<String>()
+    private val _uiState = MutableStateFlow<UiState<LoginResponse>>(UiState.Empty())
+    val uiState : StateFlow<UiState<LoginResponse>> = _uiState.asStateFlow()
 
     fun login(login: Login) {
-        val request = loginRepository.login(login)
-        request.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    loginSucess.postValue(response.body())
-                } else {
-                    loginError.postValue(ResponseParser.parseError(response))
+        _uiState.value = UiState.Loading()
+        viewModelScope.launch {
+            val result = authRepository.login(login)
+            _uiState.value = result.fold(
+                onSuccess = { response ->
+                    UiState.Success(response)
+                },
+                onFailure = { e ->
+                    UiState.Error(e.message ?: "Erro ao realizar login")
                 }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {//r
-                loginError.postValue(t.message)
-            }
-
-
-        })
+            )
+        }
     }
 }

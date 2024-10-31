@@ -1,18 +1,24 @@
 package com.crosoften.emnuvem.ui.fragment.auth.recover
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.crosoften.emnuvem.R
 import com.crosoften.emnuvem.data.model.request.forgotThree.ForgotThreeRequest
+import com.crosoften.emnuvem.data.model.state.UiState
 import com.crosoften.emnuvem.databinding.FragmentRecoverPassWordBinding
-import com.crosoften.emnuvem.ultils.notString
+import com.crosoften.emnuvem.ui.activity.auth.LoginActivity
+import com.crosoften.emnuvem.ultils.extensions.notString
+import com.crosoften.emnuvem.ultils.extensions.showError
 import com.crosoften.emnuvem.viewModel.ForgotViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -42,14 +48,17 @@ class RecoverPassWordFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.error.observe(requireActivity()) { errorMessage ->
-            errorMessage.getContentIfNotHandled()?.let { response ->
-            }
-        }
-        viewModel.sucess.observe(requireActivity()) {
-            it.getContentIfNotHandled()?.let { response ->
-                Toast.makeText(requireContext(),"Cadastrado com sucesso", Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.loginFragment)
+        lifecycleScope.launch {
+            viewModel.state.collect { state ->
+                when(state){
+                    is UiState.Error -> showError(state.message)
+                    is UiState.Success -> {
+                        Toast.makeText(requireContext(),"Senha alterada com sucesso!", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(requireContext(), LoginActivity::class.java))
+                        requireActivity().finish()
+                    }
+                    else -> {}
+                }
             }
         }
     }
@@ -73,7 +82,7 @@ class RecoverPassWordFragment : Fragment() {
         }
 
         if (binding.editPassword.error.isNullOrEmpty() && binding.editConfPass.error.isNullOrEmpty()){
-            viewModel.forgotThree(
+            viewModel.forgotResetPassword(
                 ForgotThreeRequest(
                     code = args.code, password, passwordConfirm
                 )

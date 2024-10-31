@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.crosoften.emnuvem.R
-import com.crosoften.emnuvem.data.model.request.forgotOne.ForgotOneRequest
+import com.crosoften.emnuvem.data.model.request.forgotOne.ForgotPasswordRequest
+import com.crosoften.emnuvem.data.model.state.UiState
 import com.crosoften.emnuvem.databinding.FragmentRecoverEmailBinding
-import com.crosoften.emnuvem.ultils.isValidEmail
+import com.crosoften.emnuvem.ultils.extensions.isValidEmail
+import com.crosoften.emnuvem.ultils.extensions.showError
 import com.crosoften.emnuvem.viewModel.ForgotViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -39,36 +43,39 @@ class RecoverEmailFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.error.observe(requireActivity()) { errorMessage ->
-            errorMessage.getContentIfNotHandled()?.let { response ->
-            }
-        }
-        viewModel.sucess.observe(requireActivity()) {
-            it.getContentIfNotHandled()?.let { response ->
-                findNavController().navigate(R.id.action_recoverEmailFragment_to_recoverCodeFragment)
+        lifecycleScope.launch {
+            viewModel.state.collect { state ->
+                when(state){
+                    is UiState.Error -> showError(state.message)
+                    is UiState.Success -> {
+                        findNavController().navigate(R.id.action_recoverEmailFragment_to_recoverCodeFragment)
+                    }
+                    else -> {}
+                }
             }
         }
     }
 
-    private fun validation(){
+    private fun validation() {
 
         val email = binding.email.text.toString()
 
-        if (!email.isValidEmail()){
+        if (!email.isValidEmail()) {
             binding.email.error = "Campo vazio"
 
-        }else{
+        } else {
             binding.email.error = null
         }
 
-        if (binding.email.error.isNullOrEmpty()){
-            viewModel.forgotOne(
-                ForgotOneRequest(
+        if (binding.email.error.isNullOrEmpty()) {
+            viewModel.forgotPassword(
+                ForgotPasswordRequest(
                     email
                 )
             )
         }
     }
+
     private fun setupLoginButton() {
         binding.loginButton.setOnClickListener {
             validation()

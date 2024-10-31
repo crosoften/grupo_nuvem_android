@@ -7,11 +7,16 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.crosoften.emnuvem.R
+import com.crosoften.emnuvem.data.model.request.forgotTwo.ForgotTwoRequest
+import com.crosoften.emnuvem.data.model.state.UiState
 import com.crosoften.emnuvem.databinding.FragmentRecoverCodeBinding
+import com.crosoften.emnuvem.ultils.extensions.showError
 import com.crosoften.emnuvem.viewModel.ForgotViewModel
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -19,9 +24,7 @@ class RecoverCodeFragment : Fragment() {
     private var _binding: FragmentRecoverCodeBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<ForgotViewModel>()
-
-
-    var accumulatedCode = ""
+    private var accumulatedCode = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,19 +48,15 @@ class RecoverCodeFragment : Fragment() {
 
 
     private fun observe() {
-        viewModel.error.observe(requireActivity()) { errorMessage ->
-            errorMessage.getContentIfNotHandled()?.let { response ->
-            }
-        }
-        viewModel.sucess.observe(requireActivity()) {
-            it.getContentIfNotHandled()?.let { response ->
-                binding.btnContinue.setTextColor(ContextCompat.getColor(requireContext(),
-                    R.color.white
-                ))
-                binding.btnContinue.backgroundTintList = ContextCompat.getColorStateList(requireContext(),
-                    R.color.primary
-                )
-                binding.btnContinue.isEnabled = true
+        lifecycleScope.launch {
+            viewModel.state.collect { state ->
+                when(state){
+                    is UiState.Error -> showError(state.message)
+                    is UiState.Success -> {
+                        findNavController().navigate(RecoverCodeFragmentDirections.actionRecoverCodeFragmentToRecoverPassWordFragment(accumulatedCode))
+                    }
+                    else -> {}
+                }
             }
         }
     }
@@ -83,17 +82,11 @@ class RecoverCodeFragment : Fragment() {
             accumulatedCode += text.toString()
             if (accumulatedCode.length == 4) {
                 val code = accumulatedCode
-                viewModel.forgotTwo(
-                    com.crosoften.emnuvem.data.model.request.forgotTwo.ForgotTwoRequest(
+                viewModel.forgotVerifyCode(
+                    ForgotTwoRequest(
                         code = code
                     )
                 )
-            }
-
-            viewModel.sucess.observe(viewLifecycleOwner){ response ->
-                response?.let {
-
-                }
             }
         }
     }
@@ -104,7 +97,11 @@ class RecoverCodeFragment : Fragment() {
         )
         binding.btnContinue.isEnabled = false
         binding.btnContinue.setOnClickListener {
-            findNavController().navigate(RecoverCodeFragmentDirections.actionRecoverCodeFragmentToRecoverPassWordFragment(accumulatedCode))
+            viewModel.forgotVerifyCode(
+                ForgotTwoRequest(
+                    code = accumulatedCode
+                )
+            )
         }
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()

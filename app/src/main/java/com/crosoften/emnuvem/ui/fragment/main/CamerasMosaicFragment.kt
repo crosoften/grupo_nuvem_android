@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.crosoften.emnuvem.data.model.CameraModel
 import com.crosoften.emnuvem.databinding.FragmentCamerasMosaicBinding
 import com.crosoften.emnuvem.ui.adapters.CameraMosaicAdapter
 import com.crosoften.emnuvem.ui.listeners.OnCameraClickListener
@@ -39,7 +40,7 @@ class CamerasMosaicFragment : Fragment() {
         binding.mosaicRecycler.adapter = adapter
         adapter.updateList(emptyList())
         adapter.setListener(object : OnCameraClickListener {
-            override fun onClick() {
+            override fun onClick(item: CameraModel) {
                 findNavController().navigate(CamerasMosaicFragmentDirections.actionCamerasMosaicFragmentToLiveCameraFragment())
             }
         })

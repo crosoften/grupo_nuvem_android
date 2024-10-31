@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.crosoften.emnuvem.R
 import com.crosoften.emnuvem.data.model.CameraModel
 import com.crosoften.emnuvem.databinding.CameraListItemBinding
 import com.crosoften.emnuvem.ui.listeners.OnCameraClickListener
@@ -59,15 +60,22 @@ class CameraListAdapter : RecyclerView.Adapter<CameraListAdapter.ViewHolder>() {
         fun bind(item: CameraModel) {
             binding.name.text = item.name
             binding.address.text = item.address
+
             Glide.with(binding.root)
                 .load(item.picture)
+                .placeholder(R.drawable.play_icon)
                 .optionalCenterCrop()
                 .into(binding.img)
             if (::listener.isInitialized) {
                 binding.root.setOnClickListener {
-                    listener.onClick()
+                    listener.onClick(
+                        item
+                    )
                 }
             }
         }
+
     }
+
 }
+

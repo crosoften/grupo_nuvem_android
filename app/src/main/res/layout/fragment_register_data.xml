@@ -96,7 +96,7 @@
                 app:layout_constraintTop_toBottomOf="@id/nome_tv2">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_nome2"
+                    android:id="@+id/edit_nome"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
@@ -132,7 +132,7 @@
                 app:layout_constraintTop_toBottomOf="@id/nome_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_nome"
+                    android:id="@+id/edit_cnpj"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
@@ -204,13 +204,14 @@
                 app:layout_constraintTop_toBottomOf="@id/telefone_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/telefone_email"
+                    android:id="@+id/edit_telefone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_layout_background"
                     android:hint="(00) 00000-0000"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
+                    android:maxLength="11"
                     android:lines="1"
                     android:textSize="14sp" />
 

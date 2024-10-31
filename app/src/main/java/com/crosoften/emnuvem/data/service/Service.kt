@@ -1,42 +1,63 @@
 package com.crosoften.emnuvem.data.service
 
-import retrofit2.Call
+import com.crosoften.emnuvem.data.model.RegisterModel
+import com.crosoften.emnuvem.data.model.request.Login
+import com.crosoften.emnuvem.data.model.request.addCamRequest.AddCamRequest
+import com.crosoften.emnuvem.data.model.request.forgotOne.ForgotPasswordRequest
+import com.crosoften.emnuvem.data.model.request.forgotThree.ForgotThreeRequest
+import com.crosoften.emnuvem.data.model.request.forgotTwo.ForgotTwoRequest
+import com.crosoften.emnuvem.data.model.request.register.RegisterUserRequest
+import com.crosoften.emnuvem.data.model.response.addCamResponse.MessageResponse
+import com.crosoften.emnuvem.data.model.response.getCameras.CamerasResponse
+import com.crosoften.emnuvem.data.model.response.loginResponse.LoginResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface Service {
 
     //login
 
     @POST("v1/sessions/standard")
-    fun login(
-        @Body login: com.crosoften.emnuvem.data.model.request.Login
-    ): Call<com.crosoften.emnuvem.data.model.response.loginResponse.LoginResponse>
+    suspend fun login(
+        @Body login: Login
+    ): LoginResponse
 
     //recuperar senha
 
     @POST("v1/noAuth/password/forgot")
-    fun forgotOne(
-        @Body forgotOneRequest: com.crosoften.emnuvem.data.model.request.forgotOne.ForgotOneRequest
-    ): Call<com.crosoften.emnuvem.data.model.response.addCamResponse.AddCamResponse>
+    suspend fun forgotOne(
+        @Body forgotPasswordRequest: ForgotPasswordRequest
+    ):MessageResponse
+
     @POST("v1/noAuth/password/verify-code")
-    fun forgotTwo(
-        @Body forgotTwoRequest: com.crosoften.emnuvem.data.model.request.forgotTwo.ForgotTwoRequest
-    ): Call<com.crosoften.emnuvem.data.model.response.addCamResponse.AddCamResponse>
+    suspend fun forgotTwo(
+        @Body forgotTwoRequest: ForgotTwoRequest
+    ): MessageResponse
     @POST("v1/noAuth/password/reset")
-    fun forgotThree(
-        @Body forgotThreeRequest: com.crosoften.emnuvem.data.model.request.forgotThree.ForgotThreeRequest
-    ): Call<com.crosoften.emnuvem.data.model.response.addCamResponse.AddCamResponse>
+    suspend fun forgotThree(
+        @Body forgotThreeRequest: ForgotThreeRequest
+    ): MessageResponse
 
     //cameras
 
     @POST("v1/mobile/cameras")
-    fun addCam(
-        @Body addCamRequest: com.crosoften.emnuvem.data.model.request.addCamRequest.AddCamRequest
-    ): Call<com.crosoften.emnuvem.data.model.response.addCamResponse.AddCamResponse>
+    suspend fun addCam(
+        @Body addCamRequest: AddCamRequest
+    ): MessageResponse
 
-//    @GET("/v1/mobile/cameras")
-//    fun allCam(): Call<AddCamResponse>
+    @GET("v1/mobile/cameras")
+    suspend fun getAllCameras(
+        @Query("id") id: String? = null,
+        @Query("ip") ip: String? = null,
+        @Query("name") name: String? = null,
+        @Query("description") description: String? = null
+    ): CamerasResponse
 
+    @POST("v1/landing-page/register-user")
+    suspend fun register(
+        @Body user: RegisterModel
+    ): MessageResponse
 
 }

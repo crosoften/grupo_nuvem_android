@@ -7,15 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.crosoften.emnuvem.databinding.ActivitySplashScreenBinding
 import com.crosoften.emnuvem.ui.activity.auth.LoginActivity
+import com.crosoften.emnuvem.ui.activity.main.MainActivity
+import com.crosoften.emnuvem.ultils.Preference
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
+    private lateinit var preferences: Preference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        preferences = Preference(binding.root.context)
         setContentView(binding.root)
         setupAnimation()
     }
@@ -28,8 +33,14 @@ class SplashScreenActivity : AppCompatActivity() {
                 count += 0.02f
                 delay(25)
             }
-            startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
-            finish()
+
+            if (preferences.getToken().isNullOrEmpty()) {
+                startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+                finish()
+            }
         }
     }
 }

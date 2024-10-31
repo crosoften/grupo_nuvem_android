@@ -1,4 +1,4 @@
-package com.crosoften.emnuvem.ultils
+package com.crosoften.emnuvem.ultils.extensions
 
 import android.os.Build
 import androidx.annotation.RequiresApi

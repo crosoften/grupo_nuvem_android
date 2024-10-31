@@ -10,16 +10,19 @@ import androidx.navigation.fragment.findNavController
 import com.crosoften.emnuvem.R
 import com.crosoften.emnuvem.databinding.FragmentProfileBinding
 import com.crosoften.emnuvem.ui.activity.auth.LoginActivity
+import com.crosoften.emnuvem.ultils.Preference
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private lateinit var preferences: Preference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        preferences = Preference(binding.root.context)
         return binding.root
     }
 
@@ -43,7 +46,8 @@ class ProfileFragment : Fragment() {
 
     private fun setupExitButton() {
         binding.exit.setOnClickListener {
-        startActivity(Intent(requireContext(), LoginActivity::class.java))
+            preferences.logout()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
         }
         binding.helpCenter.setOnClickListener {

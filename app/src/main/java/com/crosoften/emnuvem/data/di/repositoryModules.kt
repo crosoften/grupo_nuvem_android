@@ -1,20 +1,14 @@
 package com.crosoften.emnuvem.data.di
 
-import com.crosoften.emnuvem.data.repository.AddCamRepository
-import com.crosoften.emnuvem.data.repository.ForgotRepository
-import com.crosoften.emnuvem.data.repository.LoginRepository
+import com.crosoften.emnuvem.data.repository.CameraRepository
+import com.crosoften.emnuvem.data.repository.AuthRepository
 import org.koin.dsl.module
 
 val repositoryModules = module {
     single {
-        AddCamRepository(get())
+        CameraRepository(get())
     }
-
-    single {
-        ForgotRepository(get())
-    }
-
-    single<LoginRepository> {
-        LoginRepository(get())
+    single<AuthRepository> {
+        AuthRepository(get())
     }
 }

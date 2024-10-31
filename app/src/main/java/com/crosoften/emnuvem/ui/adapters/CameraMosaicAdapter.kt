@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.crosoften.emnuvem.R
+import com.crosoften.emnuvem.data.model.CameraModel
 import com.crosoften.emnuvem.databinding.CameraMosaicItemBinding
 import com.crosoften.emnuvem.ui.listeners.OnCameraClickListener
 import com.crosoften.emnuvem.ultils.calculateScreenWidth
@@ -15,7 +17,7 @@ class CameraMosaicAdapter(
     val context: Context
 ) : RecyclerView.Adapter<CameraMosaicAdapter.ViewHolder>() {
 
-    private var stockList: AsyncListDiffer<com.crosoften.emnuvem.data.model.CameraModel> =
+    private var stockList: AsyncListDiffer<CameraModel> =
         AsyncListDiffer(this, DiffCallBack)
      private lateinit var listener: OnCameraClickListener
     private val screenWidth = calculateScreenWidth(context)
@@ -23,8 +25,6 @@ class CameraMosaicAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val item = CameraMosaicItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        item.img.layoutParams.width = screenWidth / 3
-        item.img.layoutParams.height = screenWidth / 3
         return ViewHolder(item)
     }
 
@@ -36,23 +36,23 @@ class CameraMosaicAdapter(
         holder.bind(stockList.currentList[position])
     }
 
-    object DiffCallBack : DiffUtil.ItemCallback<com.crosoften.emnuvem.data.model.CameraModel>() {
+    object DiffCallBack : DiffUtil.ItemCallback<CameraModel>() {
         override fun areItemsTheSame(
-            oldItem: com.crosoften.emnuvem.data.model.CameraModel,
-            newItem: com.crosoften.emnuvem.data.model.CameraModel
+            oldItem: CameraModel,
+            newItem: CameraModel
         ): Boolean {
             return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: com.crosoften.emnuvem.data.model.CameraModel,
-            newItem: com.crosoften.emnuvem.data.model.CameraModel
+            oldItem: CameraModel,
+            newItem: CameraModel
         ): Boolean {
             return oldItem == newItem
         }
     }
 
-    fun updateList(list: List<com.crosoften.emnuvem.data.model.CameraModel>) {
+    fun updateList(list: List<CameraModel>) {
         stockList.submitList(list)
     }
 
@@ -62,15 +62,16 @@ class CameraMosaicAdapter(
 
     inner class ViewHolder(private val binding: CameraMosaicItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: com.crosoften.emnuvem.data.model.CameraModel) {
+        fun bind(item: CameraModel) {
             binding.name.text = item.name
-            Glide.with(binding.root)
-                .load(item.picture)
-                .optionalCenterCrop()
-                .into(binding.img)
+//            Glide.with(binding.root)
+//                .load(item.picture)
+//                .placeholder(R.drawable.cameras_icon)
+////                .optionalCenterCrop()
+//                .into(binding.img)
             if (::listener.isInitialized) {
                 binding.root.setOnClickListener {
-                    listener.onClick()
+                    listener.onClick(item)
                 }
             }
         }

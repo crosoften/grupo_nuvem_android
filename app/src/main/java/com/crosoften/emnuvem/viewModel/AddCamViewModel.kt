@@ -1,38 +1,33 @@
 package com.crosoften.emnuvem.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.crosoften.emnuvem.data.model.request.addCamRequest.AddCamRequest
-import com.crosoften.emnuvem.data.model.response.addCamResponse.AddCamResponse
-import com.crosoften.emnuvem.data.repository.AddCamRepository
-import com.crosoften.emnuvem.ultils.ResponseParser
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.crosoften.emnuvem.data.model.response.addCamResponse.MessageResponse
+import com.crosoften.emnuvem.data.model.state.UiState
+import com.crosoften.emnuvem.data.repository.CameraRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 class AddCamViewModel (
-    private val loginRepository: AddCamRepository
+    private val repository: CameraRepository
 ) : ViewModel() {
+    private val _state = MutableStateFlow<UiState<MessageResponse>>(UiState.Empty())
+    val state : StateFlow<UiState<MessageResponse>> = _state.asStateFlow()
 
-    val loginSucess = MutableLiveData<AddCamResponse>()
-    val loginError = MutableLiveData<String>()
-
-    fun login(addCamRequest: AddCamRequest) {
-        val request = loginRepository.addCam(addCamRequest)
-        request.enqueue(object : Callback<AddCamResponse> {
-            override fun onResponse(call: Call<AddCamResponse>, response: Response<AddCamResponse>) {
-                if (response.isSuccessful) {
-                    loginSucess.postValue(response.body())
-                } else {
-                    loginError.postValue(ResponseParser.parseError(response))
+    fun addCamera(addCamRequest: AddCamRequest) {
+        viewModelScope.launch {
+            val result = repository.addCamera(addCamRequest)
+            result.fold(
+                onSuccess = {
+                    _state.value = UiState.Success(it)
+                },
+                onFailure = { e ->
+                    _state.value = UiState.Error(e.message ?: "Erro ao adicionar câmera")
                 }
-            }
-
-            override fun onFailure(call: Call<AddCamResponse>, t: Throwable) {//r
-                loginError.postValue(t.message)
-            }
-
-
-        })
+            )
+        }
     }
 }
