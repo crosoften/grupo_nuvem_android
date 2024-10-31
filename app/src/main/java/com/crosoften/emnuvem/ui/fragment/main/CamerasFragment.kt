@@ -86,7 +86,15 @@ class CamerasFragment : Fragment() {
 
     private fun setupCamerasRecyclerView(cameras: List<Camera>) {
         adapter = CameraListAdapter()
-        binding.camerasRecyclerview.visibility = View.VISIBLE
+
+        if(cameras.isEmpty()){
+            binding.camerasRecyclerview.visibility = View.GONE
+            binding.tvEmpty.visibility = View.VISIBLE
+        }else{
+            binding.camerasRecyclerview.visibility = View.VISIBLE
+            binding.tvEmpty.visibility = View.GONE
+        }
+
         binding.camerasRecyclerview.adapter = adapter
 
         val list = mutableListOf<CameraModel>()

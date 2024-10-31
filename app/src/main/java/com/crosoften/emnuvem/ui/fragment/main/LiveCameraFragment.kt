@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -77,9 +76,11 @@ class LiveCameraFragment : Fragment() {
         player = ExoPlayer.Builder(requireContext()).build()
         binding.videoView?.player = player
 
-        val url = "rtsp://201.35.17.41:554"
-//        val url = "rtsp://177.129.147.4:554"
-        val mediaItem = MediaItem.fromUri(ip.lowercase())
+//        val url = "rtsp://177.62.88.93:554"
+//        val url = "rtsp://189.45.45.250:554"
+//        val url = "rtsp://201.35.17.41:554"
+//        val mediaItem = MediaItem.fromUri(ip.lowercase())
+        val mediaItem = MediaItem.fromUri(ip)
         player.setMediaItem(mediaItem)
 
         player.addListener(object : Player.Listener {
@@ -109,20 +110,6 @@ class LiveCameraFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupStatusBar() {
-        requireActivity().window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
-        WindowInsetsControllerCompat(requireActivity().window, requireActivity().window.decorView)
-            .isAppearanceLightStatusBars = false
-    }
-
-    private fun resetStatusBar() {
-        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        WindowInsetsControllerCompat(requireActivity().window, requireActivity().window.decorView)
-            .isAppearanceLightStatusBars = true
-    }
 
     private fun setupRecyclerView(cameras: List<Camera>) {
         val adapter = CameraMosaicAdapter(requireContext())
@@ -144,8 +131,7 @@ class LiveCameraFragment : Fragment() {
         adapter.updateList(list)
         adapter.setListener(object : OnCameraClickListener {
             override fun onClick(item: CameraModel) {
-//                findNavController().navigate(CamerasMosaicFragmentDirections.actionCamerasMosaicFragmentToLiveCameraFragment())
-                setupPlayer(item.ip)
+               setupPlayer(item.ip)
             }
         })
     }

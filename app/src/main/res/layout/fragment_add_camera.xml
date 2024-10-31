@@ -57,6 +57,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_layout_background"
                     android:singleLine="true"
+                    android:inputType="text"
+                    android:maxLines="1"
                     tools:ignore="VisualLintTextFieldSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
