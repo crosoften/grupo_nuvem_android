@@ -1,0 +1,115 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.vxg.cloudsdk.streamland_streamer"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="17"
+8-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml
+10
+11    <uses-feature android:name="android.hardware.camera" />
+11-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:23:5-60
+11-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:23:19-57
+12    <uses-feature android:name="android.hardware.camera.autofocus" />
+12-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:24:5-70
+12-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:24:19-67
+13
+14    <uses-permission
+14-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:26:2-62
+15        android:name="android.permission.CAMERA"
+15-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:26:19-59
+16        android:required="false" />
+16-->[com.vxg.cloudsdk:cloudsdk:2.0.299] C:\Users\Edi\.gradle\caches\transforms-3\c5228169b799df84cfc5dd655287c448\transformed\jetified-cloudsdk-2.0.299\AndroidManifest.xml:25:9-33
+17    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+17-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:27:5-71
+17-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:27:22-68
+18    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+18-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:29:5-79
+18-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:29:22-76
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:30:5-67
+19-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:30:22-64
+20    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+20-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:31:5-86
+20-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:31:22-83
+21    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+21-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:32:5-81
+21-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:32:22-78
+22    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+22-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:33:5-75
+22-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:33:22-72
+23    <uses-permission android:name="android.permission.WAKE_LOCK" />
+23-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:34:5-68
+23-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:34:22-65
+24    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+24-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:35:5-79
+24-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:35:22-76
+25
+26    <application
+26-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:5:5-21:19
+27        android:name="androidx.multidex.MultiDexApplication"
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.0.0] C:\Users\Edi\.gradle\caches\transforms-3\e5fc06b8debccfdf3be92ddf4d9d3134\transformed\core-1.0.0\AndroidManifest.xml:22:18-86
+29        android:debuggable="true"
+30        android:hardwareAccelerated="true"
+30-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:6:9-43
+31        android:icon="@drawable/ic_launcher"
+31-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:7:9-45
+32        android:label="@string/app_short_name"
+32-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:8:9-47
+33        android:largeHeap="true"
+33-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:9:9-33
+34        android:requestLegacyExternalStorage="true"
+34-->[com.vxg.cloudsdk:cloudsdk:2.0.299] C:\Users\Edi\.gradle\caches\transforms-3\c5228169b799df84cfc5dd655287c448\transformed\jetified-cloudsdk-2.0.299\AndroidManifest.xml:30:9-52
+35        android:testOnly="false"
+35-->[com.vxg.cloudsdk:cloudsdk:2.0.299] C:\Users\Edi\.gradle\caches\transforms-3\c5228169b799df84cfc5dd655287c448\transformed\jetified-cloudsdk-2.0.299\AndroidManifest.xml:31:9-33
+36        android:theme="@style/MyCustomTheme"
+36-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:10:9-45
+37        android:usesCleartextTraffic="true" >
+37-->[com.vxg.cloudsdk:cloudsdk:2.0.299] C:\Users\Edi\.gradle\caches\transforms-3\c5228169b799df84cfc5dd655287c448\transformed\jetified-cloudsdk-2.0.299\AndroidManifest.xml:32:9-44
+38        <activity
+38-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:12:9-20:20
+39            android:name="com.vxg.cloudsdk.streamland_streamer.MainActivity"
+39-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:12:19-83
+40            android:configChanges="orientation|screenSize" >
+40-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:13:13-59
+41            <intent-filter>
+41-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:15:13-19:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:16:17-69
+42-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:16:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:18:17-77
+44-->C:\Users\Edi\Documents\Projetos\crosoften\vxg\VXG.Media.SDK.Android\CloudSDK\src\streamland_streamer\src\main\AndroidManifest.xml:18:27-74
+45            </intent-filter>
+46        </activity>
+47
+48        <uses-library
+48-->[com.vxg.cloudsdk:cloudsdk:2.0.299] C:\Users\Edi\.gradle\caches\transforms-3\c5228169b799df84cfc5dd655287c448\transformed\jetified-cloudsdk-2.0.299\AndroidManifest.xml:33:9-35:40
+49            android:name="org.apache.http.legacy"
+49-->[com.vxg.cloudsdk:cloudsdk:2.0.299] C:\Users\Edi\.gradle\caches\transforms-3\c5228169b799df84cfc5dd655287c448\transformed\jetified-cloudsdk-2.0.299\AndroidManifest.xml:34:13-50
+50            android:required="false" />
+50-->[com.vxg.cloudsdk:cloudsdk:2.0.299] C:\Users\Edi\.gradle\caches\transforms-3\c5228169b799df84cfc5dd655287c448\transformed\jetified-cloudsdk-2.0.299\AndroidManifest.xml:35:13-37
+51
+52        <activity
+52-->[com.google.android.gms:play-services-base:11.6.0] C:\Users\Edi\.gradle\caches\transforms-3\747beb82bcd70629c62a1335bc77562b\transformed\jetified-play-services-base-11.6.0\AndroidManifest.xml:19:9-172
+53            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+53-->[com.google.android.gms:play-services-base:11.6.0] C:\Users\Edi\.gradle\caches\transforms-3\747beb82bcd70629c62a1335bc77562b\transformed\jetified-play-services-base-11.6.0\AndroidManifest.xml:19:19-85
+54            android:exported="false"
+54-->[com.google.android.gms:play-services-base:11.6.0] C:\Users\Edi\.gradle\caches\transforms-3\747beb82bcd70629c62a1335bc77562b\transformed\jetified-play-services-base-11.6.0\AndroidManifest.xml:19:146-170
+55            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+55-->[com.google.android.gms:play-services-base:11.6.0] C:\Users\Edi\.gradle\caches\transforms-3\747beb82bcd70629c62a1335bc77562b\transformed\jetified-play-services-base-11.6.0\AndroidManifest.xml:19:86-145
+56
+57        <meta-data
+57-->[com.google.android.gms:play-services-basement:11.6.0] C:\Users\Edi\.gradle\caches\transforms-3\7a2c30d8375ab4b555b843d49968ae13\transformed\jetified-play-services-basement-11.6.0\AndroidManifest.xml:20:9-121
+58            android:name="com.google.android.gms.version"
+58-->[com.google.android.gms:play-services-basement:11.6.0] C:\Users\Edi\.gradle\caches\transforms-3\7a2c30d8375ab4b555b843d49968ae13\transformed\jetified-play-services-basement-11.6.0\AndroidManifest.xml:20:20-65
+59            android:value="@integer/google_play_services_version" />
+59-->[com.google.android.gms:play-services-basement:11.6.0] C:\Users\Edi\.gradle\caches\transforms-3\7a2c30d8375ab4b555b843d49968ae13\transformed\jetified-play-services-basement-11.6.0\AndroidManifest.xml:20:66-119
+60    </application>
+61
+62</manifest>
