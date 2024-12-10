@@ -115,6 +115,16 @@ class Preference {
         editor.apply()
     }
 
+    fun saveUserEmail(email: String) {
+        editor.putString(KEY_EMAIL, email)
+        editor.commit()
+        editor.apply()
+    }
+
+    fun getEmail() : String {
+        return preferences.getString(KEY_EMAIL, "").toString()
+    }
+
     fun saveUserImage(image: String) {
         editor.putString(KEY_IMAGE, image)
         editor.commit()

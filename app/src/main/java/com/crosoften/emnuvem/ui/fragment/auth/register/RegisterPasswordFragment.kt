@@ -17,7 +17,7 @@ import com.crosoften.emnuvem.databinding.FragmentRegisterPasswordBinding
 import com.crosoften.emnuvem.ui.activity.auth.LoginActivity
 import com.crosoften.emnuvem.ultils.extensions.notString
 import com.crosoften.emnuvem.ultils.extensions.showError
-import com.crosoften.emnuvem.viewModel.ForgotViewModel
+import com.crosoften.emnuvem.ui.viewModel.ForgotViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

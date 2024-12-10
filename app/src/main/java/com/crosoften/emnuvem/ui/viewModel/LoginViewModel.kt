@@ -1,4 +1,4 @@
-package com.crosoften.emnuvem.viewModel
+package com.crosoften.emnuvem.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,6 +6,7 @@ import com.crosoften.emnuvem.data.model.request.Login
 import com.crosoften.emnuvem.data.model.response.loginResponse.LoginResponse
 import com.crosoften.emnuvem.data.model.state.UiState
 import com.crosoften.emnuvem.data.repository.AuthRepository
+import com.crosoften.emnuvem.ultils.HandleNetworkError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,7 +27,7 @@ class LoginViewModel (
                     UiState.Success(response)
                 },
                 onFailure = { e ->
-                    UiState.Error(e.message ?: "Erro ao realizar login")
+                    UiState.Error(HandleNetworkError().handleLogin(e))
                 }
             )
         }

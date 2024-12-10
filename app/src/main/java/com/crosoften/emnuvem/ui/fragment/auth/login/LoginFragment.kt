@@ -17,7 +17,7 @@ import com.crosoften.emnuvem.ui.activity.main.MainActivity
 import com.crosoften.emnuvem.ultils.Preference
 import com.crosoften.emnuvem.ultils.extensions.isValidEmail
 import com.crosoften.emnuvem.ultils.extensions.showError
-import com.crosoften.emnuvem.viewModel.LoginViewModel
+import com.crosoften.emnuvem.ui.viewModel.LoginViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -63,6 +63,7 @@ class LoginFragment : Fragment() {
                         preferences.saveIdUser(state.data.user.id)
                         preferences.saveToken(state.data.token)
                         preferences.saveUserName(state.data.user.name)
+                        preferences.saveUserEmail(state.data.user.email)
 
                         if(state.data.user.image != null){
                             preferences.saveUserImage(state.data.user.image)

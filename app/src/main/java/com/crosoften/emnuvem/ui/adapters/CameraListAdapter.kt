@@ -63,7 +63,7 @@ class CameraListAdapter : RecyclerView.Adapter<CameraListAdapter.ViewHolder>() {
 
             Glide.with(binding.root)
                 .load(item.picture)
-                .placeholder(R.drawable.play_icon)
+                .placeholder(R.color.gray)
                 .optionalCenterCrop()
                 .into(binding.img)
             if (::listener.isInitialized) {

@@ -19,7 +19,7 @@ import com.crosoften.emnuvem.ui.adapters.CameraListAdapter
 import com.crosoften.emnuvem.ui.listeners.OnCameraClickListener
 import com.crosoften.emnuvem.ultils.Preference
 import com.crosoften.emnuvem.ultils.extensions.showError
-import com.crosoften.emnuvem.viewModel.CamerasViewModel
+import com.crosoften.emnuvem.ui.viewModel.CamerasViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

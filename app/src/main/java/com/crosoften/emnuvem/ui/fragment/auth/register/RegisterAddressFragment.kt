@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.crosoften.emnuvem.R
 import com.crosoften.emnuvem.data.model.state.UiState
 import com.crosoften.emnuvem.databinding.FragmentRegisterAdressBinding
+import com.crosoften.emnuvem.ultils.MaskEditUtil
+import com.crosoften.emnuvem.ultils.extensions.isValidZipCode
 import com.crosoften.emnuvem.ultils.extensions.showError
-import com.crosoften.emnuvem.viewModel.RegisterViewModel
+import com.crosoften.emnuvem.ultils.states
+import com.crosoften.emnuvem.ui.viewModel.RegisterViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -34,8 +38,24 @@ class RegisterAddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLoginButton()
-
         observer()
+        setupMask()
+        stateAdapter()
+    }
+
+    private fun stateAdapter() {
+        val statesAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, states)
+        val autoCompleteTextView = binding.editState
+        autoCompleteTextView.setAdapter(statesAdapter)
+    }
+
+    private fun setupMask() {
+        binding.editZipCode.addTextChangedListener(
+            MaskEditUtil.mask(
+                binding.editZipCode,
+                MaskEditUtil.FORMAT_CEP
+            )
+        )
     }
 
     private fun observer() {
@@ -58,21 +78,49 @@ class RegisterAddressFragment : Fragment() {
         _binding = null
     }
 
+    private fun validateAddressInputs(): Boolean {
+        val zipCode = binding.editZipCode.text.toString()
+        val street = binding.editStreet.text.toString()
+        val district = binding.editDistrict.text.toString()
+        val number = binding.editNumber.text.toString()
+        val city = binding.editCity.text.toString()
+        val state = binding.editState.text.toString()
+
+        if (!zipCode.isValidZipCode()) {
+            binding.editZipCode.error = "CEP inválido"
+            return false
+        }
+
+        if (state.length > 2) {
+            binding.editState.error = "UF deve conter apenas 2 digitos"
+            return false
+        }
+
+        if (street.isBlank() || district.isBlank() || number.isBlank() || city.isBlank() || state.isBlank()) {
+            return false
+        }
+        return true
+    }
+
     private fun validate(){
         lifecycleScope.launch {
-            val registerModel = viewModel.userData.first()?.copy(
-                zipCode = binding.editZipCode.text.toString(),
-                street = binding.editStreet.text.toString(),
-                district = binding.editDistrict.text.toString(),
-                number = binding.editNumber.text.toString(),
-                city = binding.editCity.text.toString(),
-                state = binding.editState.text.toString()
-            )
+            val validate = validateAddressInputs()
 
-            if (registerModel != null) {
-                viewModel.setRegisterData(registerModel)
-                viewModel.register()
-            }
+            if(validate){
+                val registerModel = viewModel.userData.first()?.copy(
+                    zipCode = binding.editZipCode.text.toString(),
+                    street = binding.editStreet.text.toString(),
+                    district = binding.editDistrict.text.toString(),
+                    number = binding.editNumber.text.toString(),
+                    city = binding.editCity.text.toString(),
+                    state = binding.editState.text.toString()
+                )
+
+                if (registerModel != null) {
+                    viewModel.setRegisterData(registerModel)
+                    viewModel.register()
+                }
+            }else showError("Preencha todos os campos corretamente")
         }
     }
 

@@ -13,7 +13,7 @@ import com.crosoften.emnuvem.data.model.state.UiState
 import com.crosoften.emnuvem.databinding.FragmentRecoverEmailBinding
 import com.crosoften.emnuvem.ultils.extensions.isValidEmail
 import com.crosoften.emnuvem.ultils.extensions.showError
-import com.crosoften.emnuvem.viewModel.ForgotViewModel
+import com.crosoften.emnuvem.ui.viewModel.ForgotViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

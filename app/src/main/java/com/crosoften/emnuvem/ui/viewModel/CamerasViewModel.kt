@@ -1,5 +1,6 @@
-package com.crosoften.emnuvem.viewModel
+package com.crosoften.emnuvem.ui.viewModel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.crosoften.emnuvem.data.model.response.getCameras.CamerasResponse
@@ -16,6 +17,12 @@ class CamerasViewModel (
 
     private val _state = MutableStateFlow<UiState<CamerasResponse>>(UiState.Empty())
     val state : StateFlow<UiState<CamerasResponse>> = _state.asStateFlow()
+    val video = MutableLiveData("")
+
+
+    fun setVideo(ip: String){
+        video.postValue(ip)
+    }
 
     fun loadCameras() {
         viewModelScope.launch {

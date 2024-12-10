@@ -14,7 +14,7 @@ import com.crosoften.emnuvem.data.model.state.UiState
 import com.crosoften.emnuvem.databinding.FragmentRegisterCodeBinding
 import com.crosoften.emnuvem.ui.fragment.auth.recover.RecoverCodeFragmentDirections
 import com.crosoften.emnuvem.ultils.extensions.showError
-import com.crosoften.emnuvem.viewModel.ForgotViewModel
+import com.crosoften.emnuvem.ui.viewModel.ForgotViewModel
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -48,12 +48,14 @@
                 android:layout_width="123dp"
                 android:layout_height="123dp"
                 android:layout_marginTop="20dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/img_register_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sign_up_toolbar_app" />
 
             <ImageView
+                android:id="@+id/btn_change_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="85dp"
@@ -102,7 +104,7 @@
                     android:background="@drawable/input_layout_background"
                     android:hint="Exemplo Preenchido"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:lines="1"
                     android:textSize="14sp" />
 
@@ -138,7 +140,7 @@
                     android:background="@drawable/input_layout_background"
                     android:hint="Exemplo Preenchido"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:lines="1"
                     android:textSize="14sp" />
 
@@ -210,8 +212,7 @@
                     android:background="@drawable/input_layout_background"
                     android:hint="(00) 00000-0000"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:maxLength="11"
+                    android:inputType="number"
                     android:lines="1"
                     android:textSize="14sp" />
 

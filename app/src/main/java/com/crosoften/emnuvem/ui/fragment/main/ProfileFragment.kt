@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.crosoften.emnuvem.R
 import com.crosoften.emnuvem.databinding.FragmentProfileBinding
 import com.crosoften.emnuvem.ui.activity.auth.LoginActivity
@@ -28,6 +29,13 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.username.text = preferences.getName()
+        Glide.with(requireContext())
+            .load(preferences.getImage())
+            .placeholder(R.drawable.profile_picture_placeholder)
+            .into(binding.profilePicture)
+
         setupToolbar()
         setupExitButton()
         setupMyDataButton()

@@ -3,11 +3,13 @@ package com.crosoften.emnuvem.data.service
 import com.crosoften.emnuvem.data.model.RegisterModel
 import com.crosoften.emnuvem.data.model.request.Login
 import com.crosoften.emnuvem.data.model.request.addCamRequest.AddCamRequest
+import com.crosoften.emnuvem.data.model.request.contactus.ContactUsRequest
 import com.crosoften.emnuvem.data.model.request.forgotOne.ForgotPasswordRequest
 import com.crosoften.emnuvem.data.model.request.forgotThree.ForgotThreeRequest
 import com.crosoften.emnuvem.data.model.request.forgotTwo.ForgotTwoRequest
 import com.crosoften.emnuvem.data.model.request.register.RegisterUserRequest
 import com.crosoften.emnuvem.data.model.response.addCamResponse.MessageResponse
+import com.crosoften.emnuvem.data.model.response.faqs.FaqsResponse
 import com.crosoften.emnuvem.data.model.response.getCameras.CamerasResponse
 import com.crosoften.emnuvem.data.model.response.loginResponse.LoginResponse
 import retrofit2.http.Body
@@ -60,4 +62,11 @@ interface Service {
         @Body user: RegisterModel
     ): MessageResponse
 
+    @GET("v1/noAuth/faqs")
+    suspend fun getFaqs(): FaqsResponse
+
+    @POST("v1/noAuth/contactUs")
+    suspend fun sendContactUs(
+        @Body contactUsRequest: ContactUsRequest
+    ): MessageResponse
 }

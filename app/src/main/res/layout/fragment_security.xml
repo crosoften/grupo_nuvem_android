@@ -84,66 +84,14 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/obs_text"
-                    style="@style/Poppins.Bold"
-                    android:layout_width="wrap_content"
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_faq"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="25dp"
-                    android:text="Pergunta?"
-                    android:textColor="@color/primary"
-                    android:textSize="12sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/obs"
-                    style="@style/Poppins.12sp.Regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since "
-                    android:textColor="@color/gray" />
-
-
-                <com.google.android.material.textview.MaterialTextView
-
-                    style="@style/Poppins.Bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="25dp"
-                    android:text="Pergunta?"
-                    android:textColor="@color/primary"
-                    android:textSize="12sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-
-                    style="@style/Poppins.12sp.Regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since "
-                    android:textColor="@color/gray" />
-
-                <com.google.android.material.textview.MaterialTextView
-
-                    style="@style/Poppins.Bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="25dp"
-                    android:text="Pergunta?"
-                    android:textColor="@color/primary"
-                    android:textSize="12sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-
-                    style="@style/Poppins.12sp.Regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since "
-                    android:textColor="@color/gray" />
+                    tools:itemCount="8"
+                    tools:listitem="@layout/faq_item"
+                    />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

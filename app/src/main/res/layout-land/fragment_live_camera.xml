@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/white"
     tools:context=".ui.fragment.main.LiveCameraFragment"
     tools:ignore="HardcodedText">
 
@@ -12,105 +13,61 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
         android:elevation="10dp"
-        android:layout_marginTop="12dp"
+        android:theme="@style/Theme.Menu.EmNuvem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/arrow_back"
-        app:navigationIconTint="@color/white"
         app:menu="@menu/live_camera_menu"
-        android:theme="@style/Theme.Menu.EmNuvem"/>
-
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/live_camera"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_weight="2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/secondary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/live_camera"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:navigationIcon="@drawable/arrow_back"
+        app:navigationIconTint="@color/black">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/day"
-            style="@style/Poppins.14sp.Bold"
+            style="@style/ToolbarTitleAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Hoje"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+            android:text="CÂMERAS"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/cut_icon"
-            android:layout_width="44dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/cut_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/next_icon"
-            android:layout_width="44dp"
-            android:layout_height="24dp"
-            android:src="@drawable/next_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cut_icon"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/video_view"
+        android:layout_width="500dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/recycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/play_icon"
-            android:layout_width="44dp"
-            android:layout_height="24dp"
-            android:src="@drawable/play_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/next_icon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/previous_icon"
-            android:layout_width="44dp"
-            android:layout_height="24dp"
-            android:src="@drawable/previous_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/play_icon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_unavailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Video indisponivel"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/recycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/live_camera"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/camera_point_item" />
+        app:layout_constraintStart_toEndOf="@id/video_view"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:listitem="@layout/camera_mosaic_item" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
