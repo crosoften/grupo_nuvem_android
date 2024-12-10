@@ -1,4 +1,0 @@
-#Tue Oct 22 09:27:02 BRT 2024
-base.0=C\:\\Users\\Edi\\Documents\\Projetos\\crosoften\\vxg\\VXG.Media.SDK.Android\\CloudSDK\\src\\streamland_player\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
