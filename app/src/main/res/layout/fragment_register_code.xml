@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.auth.register.RegisterCodeFragment">
+    tools:context="com.emnuvem.ui.fragment.auth.register.RegisterCodeFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -58,7 +58,7 @@
                 android:text="Para cadastrar sua nova senha, insira o token que você recebeu por e-mail:"
                 android:textSize="12sp" />
 
-            <com.crosoften.emnuvem.ultils.DigitValidCustomLayout
+            <com.emnuvem.ultils.DigitValidCustomLayout
                 android:id="@+id/valid_layout"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="32dp"

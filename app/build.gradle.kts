@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.crosoften.emnuvem"
+    namespace = "com.emnuvem"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.crosoften.emnuvem"
+        applicationId = "com.emnuvem"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
