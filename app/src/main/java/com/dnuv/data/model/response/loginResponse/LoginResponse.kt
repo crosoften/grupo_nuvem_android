@@ -1,0 +1,6 @@
+package com.dnuv.data.model.response.loginResponse
+
+data class LoginResponse(
+    val token: String,
+    val user: User
+)

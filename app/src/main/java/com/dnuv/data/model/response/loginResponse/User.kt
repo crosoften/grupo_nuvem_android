@@ -1,0 +1,15 @@
+package com.dnuv.data.model.response.loginResponse
+
+data class User(
+    val createdAt: String,
+    val email: String,
+    val id: Int,
+    val image: String,
+    val imageKey: String,
+    val name: String,
+    val password: String,
+    val status: String,
+    val type: String,
+    val updatedAt: String,
+    val userHasPermissions: List<Any>
+)

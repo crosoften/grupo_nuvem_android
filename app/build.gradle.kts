@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.emnuvem"
+    namespace = "com.dnuv"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.emnuvem"
+        applicationId = "com.dnuv"
         minSdk = 26
         targetSdk = 34
         versionCode = 2
