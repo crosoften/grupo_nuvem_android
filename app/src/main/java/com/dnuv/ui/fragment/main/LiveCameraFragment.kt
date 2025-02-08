@@ -1,5 +1,6 @@
 package com.dnuv.ui.fragment.main
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,33 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.media3.common.MediaItem
-import androidx.media3.common.PlaybackException
-import androidx.media3.common.Player
-import androidx.media3.exoplayer.ExoPlayer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dnuv.R
 import com.dnuv.data.model.CameraModel
-import com.dnuv.data.model.response.getCameras.Camera
-import com.dnuv.data.model.state.UiState
 import com.dnuv.databinding.FragmentLiveCameraBinding
 import com.dnuv.ui.adapters.CameraMosaicAdapter
-import com.dnuv.ui.adapters.CameraPointAdapter
 import com.dnuv.ui.listeners.OnCameraClickListener
 import com.dnuv.ui.viewModel.CamerasViewModel
-import com.dnuv.ultils.extensions.showError
+import com.dnuv.ultils.Constants.CAM_PWD
+import com.dnuv.ultils.Constants.CAM_USER
+import ir.am3n.rtsp.client.data.SdpInfo
+import ir.am3n.rtsp.client.interfaces.RtspStatusListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class LiveCameraFragment : Fragment() {
     private var _binding: FragmentLiveCameraBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: CameraPointAdapter
-    private val viewModel by viewModel<CamerasViewModel>()
-    private var play = true
-    private lateinit var player: ExoPlayer
+    private val viewModel by activityViewModel<CamerasViewModel>()
+    private val adapter by lazy { CameraMosaicAdapter(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,111 +42,38 @@ class LiveCameraFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val ip = arguments?.getString("cameraIP")
-//        Log.i("IpCamera", "onViewCreated: $ip")
-//        if (ip != null) setupPlayer(ip)
-
-        viewModel.setVideo(arguments?.getString("cameraIP")!!)
-
-        handleState()
-        setupToolbar()
-        setupMenu()
-
-//        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, false)
-//        WindowInsetsControllerCompat(requireActivity().window,
-//        requireActivity().window.decorView).isAppearanceLightStatusBars = false
-    }
-
-    private fun handleState() {
-        lifecycleScope.launch {
-            viewModel.state.collect { state ->
-                when (state) {
-                    is UiState.Error -> showError(state.message)
-                    is UiState.Success -> {
-                        setupRecyclerView(state.data.cameras)
-                    }
-
-                    else -> {}
-                }
-            }
-        }
-    }
-
-    private fun setupPlayer(ip: String) {
-        showLoading()
-        player = ExoPlayer.Builder(requireContext()).build()
-        binding.videoView?.player = player
-
-//        val url = "rtsp://177.62.88.93:554"
-//        val url = "rtsp://189.45.45.250:554"
-//        val url = "rtsp://201.35.17.41:554"
-//        val mediaItem = MediaItem.fromUri(ip.lowercase())
-        val mediaItem = MediaItem.fromUri(ip)
-        player.setMediaItem(mediaItem)
-
-        player.addListener(object : Player.Listener {
-            override fun onPlayerError(error: PlaybackException) {
-                super.onPlayerError(error)
-                Log.e("ExoPlayerLog", "Error - OnPlayerError: ${error.errorCode}")
-            }
-
-            override fun onPlayerErrorChanged(error: PlaybackException?) {
-                super.onPlayerErrorChanged(error)
-                Log.e("ExoPlayerLog", "Error: ${error?.errorCode}")
-            }
-
-            override fun onIsLoadingChanged(isLoading: Boolean) {
-                super.onIsLoadingChanged(isLoading)
-                if (!isLoading) {
-                    hideLoading()
-                }
-            }
-        })
-        player.prepare()
-        player.play()
-    }
-
-    private fun showLoading() {
-        binding.loading?.visibility = View.VISIBLE
-        binding.videoView.visibility = View.INVISIBLE
-    }
-
-    private fun hideLoading() {
-        binding.loading?.visibility = View.GONE
-        binding.videoView.visibility = View.VISIBLE
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        viewModel.video.observe(viewLifecycleOwner) { value ->
-            setupPlayer(value)
-        }
-        viewModel.loadCameras()
-    }
-
-    override fun onPause() {
-        super.onPause()
+        setupUi()
     }
 
     override fun onDestroyView() {
+        binding.svVideo?.stop()
         super.onDestroyView()
         _binding = null
     }
 
+    private fun setupUi() {
+        setupMenu()
+        setupToolbar()
 
-    private fun setupRecyclerView(cameras: List<Camera>) {
-        val adapter = CameraMosaicAdapter(requireContext())
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = GridLayoutManager(requireContext(), 3)
 
+        viewModel.cameras.observe(viewLifecycleOwner) { cameras ->
+            setupRecyclerView(cameras)
+        }
+        viewModel.selectedCameraIP.observe(viewLifecycleOwner) { ip ->
+            setupPlayer(ip)
+        }
+    }
+
+    private fun setupRecyclerView(cameras: List<CameraModel>) {
         val list = mutableListOf<CameraModel>()
         cameras.forEach {
             list.add(
                 CameraModel(
                     ip = it.ip,
                     name = it.name,
-                    address = it.description,
+                    address = it.address,
                     picture = ""
                 )
             )
@@ -158,9 +82,76 @@ class LiveCameraFragment : Fragment() {
         adapter.updateList(list)
         adapter.setListener(object : OnCameraClickListener {
             override fun onClick(item: CameraModel) {
-                setupPlayer(item.ip)
+                viewModel.setVideo(item.ip)
             }
         })
+    }
+
+    private fun setupPlayer(ip: String?) {
+        CoroutineScope(Dispatchers.Main).launch {
+            with(binding) {
+                if (svVideo == null) return@launch
+
+                if (ip == null) {
+                    svVideo.stop()
+                    return@launch
+                }
+
+                /**
+                 * Se remover o delay (400), o tempo de execução faz com que
+                 * o metodo init() seja chamado antes do metodo stop(),
+                 * quebrando a singularidade do streaming e fazendo com que
+                 * o app acumule streams abertas em simultâneo a cada troca de câmeras,
+                 * levando a perda de performance e consequente crash
+                 *
+                 * Deve ter um jeito muito mais correto, lógico e idiomático de
+                 * tratar a troca de câmeras, mas pra hoje é o que temos
+                 */
+                if (svVideo.isStarted()) {
+                    svVideo.stop()
+                    delay(400)
+                }
+
+                val uri = Uri.parse(ip)
+
+                svVideo.init(uri, CAM_USER, CAM_PWD)
+                svVideo.setStatusListener(object : RtspStatusListener {
+                    override fun onConnecting() {
+                        logRtsp("$uri: Connecting")
+                        binding.loading?.visibility = View.VISIBLE
+                        binding.svVideo?.visibility = View.INVISIBLE
+                    }
+
+                    override fun onConnected(sdpInfo: SdpInfo) {
+                        logRtsp("$uri: Connected")
+                        binding.loading?.visibility = View.GONE
+                        binding.svVideo?.visibility = View.VISIBLE
+                    }
+
+                    override fun onFirstFrameRendered() {}
+
+                    override fun onDisconnecting() {
+                        logRtsp("$uri: Disconnecting")
+                    }
+
+                    override fun onDisconnected() {
+                        logRtsp("$uri: Disconnected")
+                    }
+
+                    override fun onUnauthorized() {
+                        logRtsp("$uri: Unauthorized")
+                        binding.svVideo?.visibility = View.INVISIBLE
+                    }
+
+                    override fun onFailed(message: String?) {
+                        logRtsp("$uri: RTSP failed with message: $message")
+                        binding.svVideo?.visibility = View.INVISIBLE
+                    }
+                })
+
+                svVideo.start(playVideo = true, playAudio = true)
+            }
+        }
     }
 
     private fun setupToolbar() {
@@ -189,5 +180,9 @@ class LiveCameraFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun logRtsp(message: String) {
+        Log.e(LiveCameraFragment::class.simpleName, message)
     }
 }

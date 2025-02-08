@@ -4,31 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.OptIn
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.media3.common.util.UnstableApi
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.dnuv.R
 import com.dnuv.data.model.CameraModel
-import com.dnuv.data.model.response.getCameras.Camera
-import com.dnuv.data.model.state.UiState
 import com.dnuv.databinding.FragmentCamerasBinding
 import com.dnuv.ui.adapters.CameraListAdapter
 import com.dnuv.ui.listeners.OnCameraClickListener
 import com.dnuv.ui.viewModel.CamerasViewModel
 import com.dnuv.ultils.Preference
-import com.dnuv.ultils.extensions.showError
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class CamerasFragment : Fragment() {
     private var _binding: FragmentCamerasBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: CameraListAdapter
-    private val viewModel by viewModel<CamerasViewModel>()
-    private lateinit var preferences : Preference
+    private val viewModel by activityViewModel<CamerasViewModel>()
+    private lateinit var preferences: Preference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +34,6 @@ class CamerasFragment : Fragment() {
         return binding.root
     }
 
-    @OptIn(UnstableApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,7 +42,7 @@ class CamerasFragment : Fragment() {
         viewModelObservers()
     }
 
-    private fun setupSelf(){
+    private fun setupSelf() {
         binding.username.text = preferences.getName()
         Glide.with(requireContext())
             .load(preferences.getImage())
@@ -63,18 +57,8 @@ class CamerasFragment : Fragment() {
 
     private fun viewModelObservers() {
         lifecycleScope.launch {
-            viewModel.state.collect { state ->
-                when (state) {
-                    is UiState.Error -> {
-                        showError(state.message)
-                    }
-
-                    is UiState.Success -> {
-                        setupCamerasRecyclerView(state.data.cameras)
-                    }
-
-                    else -> {}
-                }
+            viewModel.cameras.observe(viewLifecycleOwner) { cameras ->
+                setupCamerasRecyclerView(cameras)
             }
         }
     }
@@ -84,13 +68,13 @@ class CamerasFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupCamerasRecyclerView(cameras: List<Camera>) {
+    private fun setupCamerasRecyclerView(cameras: List<CameraModel>) {
         adapter = CameraListAdapter()
 
-        if(cameras.isEmpty()){
+        if (cameras.isEmpty()) {
             binding.camerasRecyclerview.visibility = View.GONE
             binding.tvEmpty.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.camerasRecyclerview.visibility = View.VISIBLE
             binding.tvEmpty.visibility = View.GONE
         }
@@ -103,7 +87,7 @@ class CamerasFragment : Fragment() {
                 CameraModel(
                     ip = it.ip,
                     name = it.name,
-                    address = it.description,
+                    address = it.address,
                     picture = ""
                 )
             )
@@ -112,6 +96,7 @@ class CamerasFragment : Fragment() {
         adapter.updateList(list)
         adapter.setListener(object : OnCameraClickListener {
             override fun onClick(item: CameraModel) {
+                viewModel.setVideo(item.ip)
                 findNavController().navigate(
                     CamerasFragmentDirections.actionCamerasFragmentToLiveCameraFragment(
                         item.ip

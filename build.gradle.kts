@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         google()
+        mavenCentral()
+        maven("https://jitpack.io")
     }
     dependencies {
         val navVersion = "2.8.3"

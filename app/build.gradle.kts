@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.dnuv"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.dnuv"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -83,9 +83,10 @@ dependencies {
     implementation ("com.amazonaws:aws-android-sdk-mobile-client:$awsVersion")
 
     //exo player
-    implementation("androidx.media3:media3-exoplayer:1.4.1")
-    implementation("androidx.media3:media3-exoplayer-dash:1.4.1")
-    implementation("androidx.media3:media3-ui:1.4.1")
-//    implementation("com.google.android.exoplayer:exoplayer:3.0.0")
-    implementation("androidx.media3:media3-exoplayer-rtsp:1.4.1")
+    implementation("androidx.media3:media3-exoplayer:1.5.0")
+    implementation("androidx.media3:media3-exoplayer-dash:1.5.0")
+    implementation("androidx.media3:media3-ui:1.5.0")
+    implementation("androidx.media3:media3-exoplayer-rtsp:1.5.0")
+    implementation("com.github.alexeyvasilyev:rtsp-client-android:5.3.4")
+    implementation("com.github.am3n:rtsp-client-android:5.1.0")
 }

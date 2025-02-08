@@ -1,56 +1,48 @@
 package com.dnuv.ui.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.dnuv.data.model.response.getCameras.CamerasResponse
-import com.dnuv.data.model.state.UiState
+import com.dnuv.data.model.CameraModel
 import com.dnuv.data.repository.CameraRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class CamerasViewModel (
+class CamerasViewModel(
     private val repository: CameraRepository
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<UiState<CamerasResponse>>(UiState.Empty())
-    val state : StateFlow<UiState<CamerasResponse>> = _state.asStateFlow()
-    val video = MutableLiveData("")
+    private val _cameras = MutableStateFlow(emptyList<CameraModel>())
+    val cameras = _cameras.asLiveData()
 
+    private val _selectedCameraIP = MutableStateFlow<String?>(null)
+    val selectedCameraIP = _selectedCameraIP.asLiveData()
 
-    fun setVideo(ip: String){
-        video.postValue(ip)
+    fun setVideo(ip: String) {
+        _selectedCameraIP.update { ip }
     }
 
     fun loadCameras() {
         viewModelScope.launch {
             val result = repository.getCameras()
             result.fold(
-                onSuccess = {
-                    _state.value = UiState.Success(it)
+                onSuccess = { response ->
+                    _cameras.update { response.cameras.map { it.toModel() } }
+//                    _uiState.update {
+//                        it.copy(
+//                            isLoading = false,
+//                            cameras = response.cameras.map { it.toModel() }
+//                        )
+//                    }
                 },
                 onFailure = { e ->
-                    _state.value = UiState.Error(e.message ?: "Erro ao carregar câmeras")
-                }
-            )
-        }
-    }
-
-    fun getCamera(
-        id: String
-    ) {
-        viewModelScope.launch {
-            val result = repository.getCameras(
-                id = id
-            )
-            result.fold(
-                onSuccess = {
-                    _state.value = UiState.Success(it)
-                },
-                onFailure = { e ->
-                    _state.value = UiState.Error(e.message ?: "Erro ao carregar câmeras")
+//                    _uiState.update {
+//                        it.copy(
+//                            isLoading = false,
+//                            error = "Erro ao carregar câmeras"
+//                        )
+//                    }
                 }
             )
         }
