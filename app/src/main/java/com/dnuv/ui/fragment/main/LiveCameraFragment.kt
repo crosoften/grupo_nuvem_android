@@ -51,10 +51,8 @@ class LiveCameraFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupUi() {
-        setupMenu()
-        setupToolbar()
-
+    override fun onResume() {
+        super.onResume()
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = GridLayoutManager(requireContext(), 3)
 
@@ -64,6 +62,11 @@ class LiveCameraFragment : Fragment() {
         viewModel.selectedCameraIP.observe(viewLifecycleOwner) { ip ->
             setupPlayer(ip)
         }
+    }
+
+    private fun setupUi() {
+        setupMenu()
+        setupToolbar()
     }
 
     private fun setupRecyclerView(cameras: List<CameraModel>) {

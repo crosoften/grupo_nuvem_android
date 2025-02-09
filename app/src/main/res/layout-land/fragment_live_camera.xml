@@ -35,8 +35,8 @@
 
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <androidx.media3.ui.PlayerView
-        android:id="@+id/video_view"
+    <ir.am3n.rtsp.client.widget.RtspSurfaceView
+        android:id="@+id/svVideo"
         android:layout_width="500dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/video_view"
+        app:layout_constraintStart_toEndOf="@id/svVideo"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:listitem="@layout/camera_mosaic_item" />
 
