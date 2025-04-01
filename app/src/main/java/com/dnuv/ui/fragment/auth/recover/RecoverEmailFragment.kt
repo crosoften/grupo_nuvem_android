@@ -46,7 +46,30 @@ class RecoverEmailFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.state.collect { state ->
                 when(state){
-                    is UiState.Error -> showError(state.message)
+                    is UiState.Error -> {
+                        val errorMessage = when {
+                            state.message.contains("404", ignoreCase = true) -> "Usuário não encontrado"
+                            state.message.contains("400", ignoreCase = true) -> "Requisição inválida"
+                            state.message.contains("401", ignoreCase = true) -> "Acesso não autorizado"
+                            state.message.contains(
+                                "403",
+                                ignoreCase = true
+                            ) -> "Você não tem permissão para isso"
+
+                            state.message.contains(
+                                "500",
+                                ignoreCase = true
+                            ) -> "Erro interno do servidor. Tente novamente mais tarde"
+
+                            state.message.contains(
+                                "timeout",
+                                ignoreCase = true
+                            ) -> "Tempo de resposta esgotado. Verifique sua conexão"
+
+                            else -> "Ocorreu um erro inesperado"
+                        }
+                        showError(errorMessage)
+                    }
                     is UiState.Success -> {
                         findNavController().navigate(R.id.action_recoverEmailFragment_to_recoverCodeFragment)
                     }

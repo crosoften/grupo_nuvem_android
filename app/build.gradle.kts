@@ -89,4 +89,7 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer-rtsp:1.5.0")
     implementation("com.github.alexeyvasilyev:rtsp-client-android:5.3.4")
     implementation("com.github.am3n:rtsp-client-android:5.1.0")
+
+    //CircleImageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }

@@ -46,7 +46,30 @@ class RegisterPasswordFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.state.collect { state ->
                 when(state){
-                    is UiState.Error -> showError(state.message)
+                    is UiState.Error ->{
+                        val errorMessage = when {
+                            state.message.contains("404", ignoreCase = true) -> "Usuário não encontrado"
+                            state.message.contains("400", ignoreCase = true) -> "Requisição inválida"
+                            state.message.contains("401", ignoreCase = true) -> "Acesso não autorizado"
+                            state.message.contains(
+                                "403",
+                                ignoreCase = true
+                            ) -> "Você não tem permissão para isso"
+
+                            state.message.contains(
+                                "500",
+                                ignoreCase = true
+                            ) -> "Erro interno do servidor. Tente novamente mais tarde"
+
+                            state.message.contains(
+                                "timeout",
+                                ignoreCase = true
+                            ) -> "Tempo de resposta esgotado. Verifique sua conexão"
+
+                            else -> "Ocorreu um erro inesperado"
+                        }
+                        showError(errorMessage)
+                    }
                     is UiState.Success -> {
                         Toast.makeText(requireContext(),"Cadastrado com sucesso", Toast.LENGTH_LONG).show()
                         startActivity(Intent(requireContext(), LoginActivity::class.java))
@@ -63,25 +86,25 @@ class RegisterPasswordFragment : Fragment() {
         val password = binding.editPassword.text.toString()
         val passwordConfirm = binding.editConfPass.text.toString()
 
+        val finalPassword = password == passwordConfirm
 
-        if (!password.notString()) {
-            binding.editPassword.error = "Campo vazio"
-        } else {
-            binding.editPassword.error = null
-        }
-
-        if (!passwordConfirm.notString()) {
-            binding.editConfPass.error = "Campo vazio"
-        } else {
-            binding.editConfPass.error = null
-        }
-
-        if (binding.editPassword.error.isNullOrEmpty() && binding.editConfPass.error.isNullOrEmpty()){
-            viewModel.forgotResetPassword(
-                ForgotThreeRequest(
-                    code = args.code, password, passwordConfirm
+        when {
+            password.isNotEmpty() -> {
+                binding.editPassword.error = null
+            }
+            passwordConfirm.isNotEmpty() -> {
+                binding.editConfPass.error = null
+            }
+            password == passwordConfirm -> {
+                viewModel.forgotResetPassword(
+                    ForgotThreeRequest(
+                        code = args.code, password, passwordConfirm
+                    )
                 )
-            )
+            }
+            else -> {
+                showError("Verifique se os campos estão preenchidos e tente novamente")
+            }
         }
     }
 

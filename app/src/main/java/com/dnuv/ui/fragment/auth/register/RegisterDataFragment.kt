@@ -112,8 +112,11 @@ class RegisterDataFragment : Fragment() {
         }
 
         if(!binding.termsCheck.isChecked){
-            binding.termsCheck.error = "Você deve aceitar os termos de uso"
+            binding.errorText.visibility = View.VISIBLE
             isValid = false
+        }
+        else {
+            binding.errorText.visibility = View.GONE
         }
 
         return isValid

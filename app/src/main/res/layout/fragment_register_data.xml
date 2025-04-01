@@ -43,7 +43,7 @@
                     android:textStyle="bold" />
             </androidx.appcompat.widget.Toolbar>
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView10"
                 android:layout_width="123dp"
                 android:layout_height="123dp"
@@ -245,9 +245,19 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/black"
                         android:includeFontPadding="false"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/error_text"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                        android:id="@+id/error_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"
+                        android:visibility="gone"
+                        android:text="Você deve aceitar os termos de uso"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/terms_check"/>
 
                     <TextView
                         android:id="@+id/textView47"

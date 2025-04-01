@@ -50,7 +50,16 @@ class RecoverCodeFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.state.collect { state ->
                 when(state){
-                    is UiState.Error -> showError(state.message)
+                    is UiState.Error -> {
+                        val errorMessage = when {
+                            state.message.contains("404", ignoreCase = true) -> "Código inválido ou expirado"
+                            state.message.contains("400", ignoreCase = true) -> "Código incorreto. Tente novamente"
+                            state.message.contains("429", ignoreCase = true) -> "Muitas tentativas. Aguarde um momento"
+                            state.message.contains("500", ignoreCase = true) -> "Erro no servidor. Tente novamente mais tarde"
+                            else -> "Ocorreu um erro inesperado ao validar o código"
+                        }
+                        showError(errorMessage)
+                    }
                     is UiState.Success -> {
                         findNavController().navigate(RecoverCodeFragmentDirections.actionRecoverCodeFragmentToRecoverPassWordFragment(accumulatedCode))
                     }

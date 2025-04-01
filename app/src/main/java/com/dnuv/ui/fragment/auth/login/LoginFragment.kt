@@ -52,7 +52,7 @@ class LoginFragment : Fragment() {
 
                     is UiState.Error -> {
                         showLoading(false)
-                        showError(state.message)
+                        showError("Email ou senha incorretos")
                     }
 
                     is UiState.Loading -> {
