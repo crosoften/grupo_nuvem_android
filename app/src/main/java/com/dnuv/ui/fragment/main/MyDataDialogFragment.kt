@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import com.dnuv.R
 import com.dnuv.databinding.DialogFragmentMyDataBinding
 
 class MyDataDialogFragment : DialogFragment() {
@@ -27,12 +29,13 @@ class MyDataDialogFragment : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.editData.setOnClickListener {
-            Toast.makeText(requireContext(), "Em breve...", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.editData)
         }
         binding.changePassword.setOnClickListener {
-            Toast.makeText(requireContext(), "Em breve...", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.editPassword)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

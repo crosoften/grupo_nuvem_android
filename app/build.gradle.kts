@@ -38,6 +38,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    sourceSets {
+        getByName("main") {
+            assets {
+                srcDirs("src\\main\\assets", "src\\main\\assets")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -92,4 +99,8 @@ dependencies {
 
     //CircleImageView
     implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    //PDFView
+    implementation("io.github.afreakyelf:Pdf-Viewer:2.3.2")
+
 }

@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.dnuv.databinding.FragmentPoliticBinding
+import com.dnuv.ui.fragment.terms.copyPdfToCache
+import com.rajat.pdfviewer.util.CacheStrategy
 
 
 class PoliticFragment : Fragment() {
@@ -24,6 +26,13 @@ class PoliticFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLoginButton()
+
+        val pdfFile = copyPdfToCache(view.context, "politica_privacidade.pdf")
+
+        binding.textTerms.initWithFile(
+            file = pdfFile,
+            cacheStrategy = CacheStrategy.MAXIMIZE_PERFORMANCE
+        )
     }
 
     override fun onDestroyView() {

@@ -88,4 +88,13 @@
         android:name="com.dnuv.ui.fragment.security.SecurityFragment"
         android:label="fragment_security"
         tools:layout="@layout/fragment_security" />
+    <fragment android:id="@+id/editData"
+        android:name="com.dnuv.ui.fragment.user.EditData"
+        android:label="fragment_edit_data"
+        tools:layout="@layout/fragment_edit_data" />
+    <fragment
+        android:id="@+id/editPassword"
+        android:name="com.dnuv.ui.fragment.user.EditPassword"
+        android:label="fragment_edit_data"
+        tools:layout="@layout/fragment_edit_password"/>
 </navigation>

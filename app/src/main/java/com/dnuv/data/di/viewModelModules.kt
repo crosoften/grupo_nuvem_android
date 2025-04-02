@@ -7,6 +7,7 @@ import com.dnuv.ui.viewModel.FaqViewModel
 import com.dnuv.ui.viewModel.ForgotViewModel
 import com.dnuv.ui.viewModel.LoginViewModel
 import com.dnuv.ui.viewModel.RegisterViewModel
+import com.dnuv.ui.viewModel.UserViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -34,5 +35,8 @@ val viewModelModules = module {
 
     viewModel {
         ContactViewModel(get())
+    }
+    viewModel {
+        UserViewModel(get(), get())
     }
 }

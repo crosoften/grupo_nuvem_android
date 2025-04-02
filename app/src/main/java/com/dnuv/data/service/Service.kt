@@ -7,12 +7,16 @@ import com.dnuv.data.model.request.contactus.ContactUsRequest
 import com.dnuv.data.model.request.forgotOne.ForgotPasswordRequest
 import com.dnuv.data.model.request.forgotThree.ForgotThreeRequest
 import com.dnuv.data.model.request.forgotTwo.ForgotTwoRequest
+import com.dnuv.data.model.request.user.UpdateUserRequest
 import com.dnuv.data.model.response.addCamResponse.MessageResponse
 import com.dnuv.data.model.response.faqs.FaqsResponse
 import com.dnuv.data.model.response.getCameras.CamerasResponse
 import com.dnuv.data.model.response.loginResponse.LoginResponse
+import com.dnuv.data.model.response.user.UserResponse
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -68,4 +72,12 @@ interface Service {
     suspend fun sendContactUs(
         @Body contactUsRequest: ContactUsRequest
     ): MessageResponse
+
+    @GET("v1/myself")
+    suspend fun getUserData(): Response<UserResponse>
+
+    @PATCH("v1/mobile/profile")
+    suspend fun updateUserProfile(
+        @Body user: UpdateUserRequest
+    ): Response<Unit>
 }
