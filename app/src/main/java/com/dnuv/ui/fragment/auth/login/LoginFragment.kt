@@ -65,9 +65,7 @@ class LoginFragment : Fragment() {
                         preferences.saveUserName(state.data.user.name)
                         preferences.saveUserEmail(state.data.user.email)
 
-                        if(state.data.user.image != null){
-                            preferences.saveUserImage(state.data.user.image)
-                        }
+                        preferences.saveUserImage(state.data.user.image)
                         startActivity(Intent(requireContext(), MainActivity::class.java))
                         requireActivity().finish()
                     }

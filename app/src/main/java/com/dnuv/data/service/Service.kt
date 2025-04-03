@@ -12,12 +12,16 @@ import com.dnuv.data.model.response.addCamResponse.MessageResponse
 import com.dnuv.data.model.response.faqs.FaqsResponse
 import com.dnuv.data.model.response.getCameras.CamerasResponse
 import com.dnuv.data.model.response.loginResponse.LoginResponse
+import com.dnuv.data.model.response.upload.ImageUploadResponse
 import com.dnuv.data.model.response.user.UserResponse
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface Service {
@@ -80,4 +84,11 @@ interface Service {
     suspend fun updateUserProfile(
         @Body user: UpdateUserRequest
     ): Response<Unit>
+    @Multipart
+    @POST("v1/upload/standard")
+    suspend fun uploadImage(
+        @Part file: MultipartBody.Part
+    ): Response<ImageUploadResponse>
+
+
 }

@@ -47,6 +47,31 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="123dp"
+                        android:layout_height="123dp"
+                        android:layout_marginTop="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_register_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sign_up_toolbar_app" />
+
+                    <ImageView
+                        android:id="@+id/btn_change_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="85dp"
+                        android:src="@drawable/ic_cam"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+                        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
                 <com.google.android.material.textview.MaterialTextView
                     style="@style/Poppins.Light"

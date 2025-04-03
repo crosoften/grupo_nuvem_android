@@ -1,6 +1,8 @@
 package com.dnuv.ui.fragment.main
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +46,7 @@ class CamerasFragment : Fragment() {
 
     private fun setupSelf() {
         binding.username.text = preferences.getName()
+        Log.d(TAG, "setupSelf: ${preferences.getImage()}")
         Glide.with(requireContext())
             .load(preferences.getImage())
             .placeholder(R.drawable.profile_picture_placeholder)
