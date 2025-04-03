@@ -137,7 +137,7 @@ class EditData: Fragment() {
                     name = binding.editName.text.toString(),
                     email = binding.editEmail.text.toString(),
                 )
-                viewModel.uploadAndUpdateUserProfile(userRequest)
+                viewModel.uploadAndUpdateUserProfile(userRequest, binding.root.context)
             }
         }
     }

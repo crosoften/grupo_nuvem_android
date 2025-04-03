@@ -7,20 +7,25 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.dnuv.R
 import com.dnuv.data.model.request.contactus.ContactUsRequest
 import com.dnuv.data.model.state.UiState
 import com.dnuv.databinding.FragmentContactBinding
 import com.dnuv.ui.viewModel.ContactViewModel
+import com.dnuv.ui.viewModel.UserViewModel
 import com.dnuv.ultils.Preference
 import com.dnuv.ultils.extensions.showError
 import com.dnuv.ultils.extensions.showSnackBar
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ContactFragment : Fragment() {
     private lateinit var binding: FragmentContactBinding
     private lateinit var preferences: Preference
+    private val userViewModel by activityViewModel<UserViewModel>()
     private val viewModel by viewModel<ContactViewModel>()
 
     override fun onCreateView(
@@ -52,8 +57,14 @@ class ContactFragment : Fragment() {
     }
 
     private fun setupView() {
-        binding.editName.setText(preferences.getName())
-        binding.editEmail.setText(preferences.getEmail())
+        userViewModel.userData.observe(viewLifecycleOwner) { user ->
+            user?.let {
+                binding.editName.setText(it.name)
+                binding.editEmail.setText(it.email)
+            }
+
+
+        }
     }
 
     private fun setupClickListeners() {

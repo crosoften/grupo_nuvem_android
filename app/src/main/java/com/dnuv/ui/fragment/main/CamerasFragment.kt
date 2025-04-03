@@ -16,6 +16,7 @@ import com.dnuv.databinding.FragmentCamerasBinding
 import com.dnuv.ui.adapters.CameraListAdapter
 import com.dnuv.ui.listeners.OnCameraClickListener
 import com.dnuv.ui.viewModel.CamerasViewModel
+import com.dnuv.ui.viewModel.UserViewModel
 import com.dnuv.ultils.Preference
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -25,6 +26,7 @@ class CamerasFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: CameraListAdapter
     private val viewModel by activityViewModel<CamerasViewModel>()
+    private val userViewModel by activityViewModel<UserViewModel>()
     private lateinit var preferences: Preference
 
     override fun onCreateView(
@@ -38,6 +40,8 @@ class CamerasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userViewModel.fetchUserData()
+
 
         setupSelf()
         setupMosaicButton()
@@ -45,12 +49,19 @@ class CamerasFragment : Fragment() {
     }
 
     private fun setupSelf() {
-        binding.username.text = preferences.getName()
-        Log.d(TAG, "setupSelf: ${preferences.getImage()}")
-        Glide.with(requireContext())
-            .load(preferences.getImage())
-            .placeholder(R.drawable.profile_picture_placeholder)
-            .into(binding.userPicture)
+        userViewModel.userData.observe(viewLifecycleOwner, { user ->
+            user?.let {
+                binding.username.text = it.name
+                Log.d(TAG, "setupSelf: ${preferences.getImage()}")
+                Glide.with(requireContext())
+                    .load(it.image)
+                    .placeholder(R.drawable.profile_picture_placeholder)
+                    .into(binding.userPicture)
+            }
+
+
+        })
+
     }
 
     override fun onResume() {
