@@ -1,11 +1,13 @@
 package com.dnuv.data.repository
 
-import com.dnuv.data.model.request.addCamRequest.AddCamRequest
+import com.dnuv.data.model.request.camera.AddCamRequest
+import com.dnuv.data.model.request.camera.UpdateCameraRequest
 import com.dnuv.data.model.request.contactus.ContactUsRequest
 import com.dnuv.data.model.response.addCamResponse.MessageResponse
 import com.dnuv.data.model.response.faqs.FaqsResponse
 import com.dnuv.data.model.response.getCameras.CamerasResponse
 import com.dnuv.data.service.Service
+import retrofit2.Response
 
 class CameraRepository(
     private val appService: Service
@@ -50,6 +52,14 @@ class CameraRepository(
         }catch (e: Exception){
             Result.failure(e)
         }
+    }
+
+    suspend fun updateCamera(id: String, request: UpdateCameraRequest): Response<Unit> {
+        return appService.updateCamera(id, request)
+    }
+
+    suspend fun deleteCamera(id: String): Response<Unit> {
+        return appService.deleteCamera(id)
     }
 
 }

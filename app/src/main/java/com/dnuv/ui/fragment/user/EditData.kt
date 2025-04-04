@@ -17,16 +17,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.dnuv.R
-import com.dnuv.data.model.RegisterModel
 import com.dnuv.data.model.request.user.UpdateUserRequest
-import com.dnuv.data.service.Service
 import com.dnuv.databinding.FragmentEditDataBinding
-import com.dnuv.ui.activity.auth.LoginActivity
 import com.dnuv.ui.viewModel.UserViewModel
 import com.dnuv.ultils.MaskEditUtil
 import com.dnuv.ultils.Preference
@@ -64,6 +58,8 @@ class EditData: Fragment() {
         viewModel.userData.observe(viewLifecycleOwner) { user ->
             user?.let {
                 binding.editName.setText(it.name)
+                binding.editCnpj.setText(it.document)
+                binding.editTelefone.setText(it.phone)
                 binding.editEmail.setText(it.email)
                 Glide.with(requireContext())
                     .load(it.image)
@@ -136,6 +132,8 @@ class EditData: Fragment() {
                 val userRequest = UpdateUserRequest(
                     name = binding.editName.text.toString(),
                     email = binding.editEmail.text.toString(),
+                    document = binding.editCnpj.text.toString(),
+                    phone = binding.editTelefone.text.toString()
                 )
                 viewModel.uploadAndUpdateUserProfile(userRequest, binding.root.context)
             }

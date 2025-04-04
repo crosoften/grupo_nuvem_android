@@ -19,6 +19,11 @@
             app:destination="@id/camerasMosaicFragment" />
     </fragment>
     <fragment
+        android:id="@+id/editCameraFragment"
+        android:name="com.dnuv.ui.fragment.main.EditCamera"
+        android:label="edit_camera"
+        tools:layout="@layout/fragment_add_camera"/>
+    <fragment
         android:id="@+id/videosFragment"
         android:name="com.dnuv.ui.fragment.main.VideosFragment"
         android:label="fragment_videos"

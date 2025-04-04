@@ -77,7 +77,8 @@ class LiveCameraFragment : Fragment() {
                     ip = it.ip,
                     name = it.name,
                     address = it.address,
-                    picture = ""
+                    picture = "",
+                    id = it.id
                 )
             )
         }

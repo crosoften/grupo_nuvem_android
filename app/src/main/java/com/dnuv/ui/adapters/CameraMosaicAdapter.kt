@@ -58,6 +58,7 @@ class CameraMosaicAdapter(
         this.listener = listener
     }
 
+
     inner class ViewHolder(private val binding: CameraMosaicItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CameraModel) {
@@ -69,7 +70,7 @@ class CameraMosaicAdapter(
 //                .into(binding.img)
             if (::listener.isInitialized) {
                 binding.root.setOnClickListener {
-                    listener.onClick(item)
+                    listener.onClick(item, position)
                 }
             }
         }

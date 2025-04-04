@@ -54,10 +54,20 @@ class CameraListAdapter : RecyclerView.Adapter<CameraListAdapter.ViewHolder>() {
     fun setListener(listener: OnCameraClickListener) {
         this.listener = listener
     }
+    fun setClickToEditCamera(listener: OnCameraClickListener){
+        this.listener = listener
+    }
+    fun setClickToExcludeCamera(listener: OnCameraClickListener){
+        this.listener = listener
+    }
+
+    fun getCurrentList(): List<CameraModel> = stockList.currentList.toList()
+
 
     inner class ViewHolder(private val binding: CameraListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CameraModel) {
+
             binding.name.text = item.name
             binding.address.text = item.address
 
@@ -69,7 +79,17 @@ class CameraListAdapter : RecyclerView.Adapter<CameraListAdapter.ViewHolder>() {
             if (::listener.isInitialized) {
                 binding.root.setOnClickListener {
                     listener.onClick(
-                        item
+                        item, absoluteAdapterPosition
+                    )
+                }
+                binding.editButton.setOnClickListener {
+                    listener.onClick(
+                        item, absoluteAdapterPosition
+                    )
+                }
+                binding.deleteButton.setOnClickListener {
+                    listener.onClick(
+                        item, absoluteAdapterPosition
                     )
                 }
             }

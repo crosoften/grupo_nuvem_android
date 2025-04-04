@@ -1,11 +1,13 @@
 package com.dnuv.ui.fragment.main
 
+import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,7 @@ import com.dnuv.databinding.FragmentCamerasBinding
 import com.dnuv.ui.adapters.CameraListAdapter
 import com.dnuv.ui.listeners.OnCameraClickListener
 import com.dnuv.ui.viewModel.CamerasViewModel
+import com.dnuv.ui.viewModel.EditCameraViewModel
 import com.dnuv.ui.viewModel.UserViewModel
 import com.dnuv.ultils.Preference
 import kotlinx.coroutines.launch
@@ -27,6 +30,7 @@ class CamerasFragment : Fragment() {
     private lateinit var adapter: CameraListAdapter
     private val viewModel by activityViewModel<CamerasViewModel>()
     private val userViewModel by activityViewModel<UserViewModel>()
+    private val editCameraViewModel by activityViewModel<EditCameraViewModel>()
     private lateinit var preferences: Preference
 
     override fun onCreateView(
@@ -102,20 +106,56 @@ class CamerasFragment : Fragment() {
                     ip = it.ip,
                     name = it.name,
                     address = it.address,
-                    picture = ""
+                    picture = "",
+                    id = it.id
                 )
             )
         }
 
         adapter.updateList(list)
         adapter.setListener(object : OnCameraClickListener {
-            override fun onClick(item: CameraModel) {
+            override fun onClick(item: CameraModel, position: Int) {
                 viewModel.setVideo(item.ip)
                 findNavController().navigate(
                     CamerasFragmentDirections.actionCamerasFragmentToLiveCameraFragment(
                         item.ip
                     )
                 )
+            }
+        })
+        adapter.setClickToEditCamera(object : OnCameraClickListener {
+            override fun onClick(item: CameraModel, position: Int) {
+                editCameraViewModel.setCameraModel(item)
+                findNavController().navigate(
+                    R.id.editCameraFragment
+                )
+            }
+        })
+        adapter.setClickToExcludeCamera(object : OnCameraClickListener {
+            override fun onClick(item: CameraModel, position: Int) {
+                val id = item.id
+
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Excluir Câmera")
+                    .setMessage("Tem certeza que deseja excluir esta câmera?")
+                    .setPositiveButton("Excluir") { _, _ ->
+                        editCameraViewModel.deleteCamera(id)
+
+                        editCameraViewModel.deleteStatus.observe(viewLifecycleOwner) { result ->
+                            result.onSuccess {
+                                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                                adapter.notifyItemRemoved(position)
+                                val updatedList = adapter.getCurrentList().filter { it.id != id }
+                                adapter.updateList(updatedList)
+                            }.onFailure {
+                                Toast.makeText(requireContext(), "Erro: ${it.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
+
+
             }
         })
     }

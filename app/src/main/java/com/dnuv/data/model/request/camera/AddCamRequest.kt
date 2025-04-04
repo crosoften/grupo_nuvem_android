@@ -1,4 +1,4 @@
-package com.dnuv.data.model.request.addCamRequest
+package com.dnuv.data.model.request.camera
 
 data class AddCamRequest(
     val camera: String,

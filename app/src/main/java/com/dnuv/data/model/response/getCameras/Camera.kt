@@ -17,6 +17,7 @@ data class Camera(
         ip = ip,
         name = name,
         address = description,
-        picture = ""
+        picture = "",
+        id = id.toString()
     )
 }

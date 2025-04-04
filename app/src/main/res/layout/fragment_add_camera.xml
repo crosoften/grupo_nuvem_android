@@ -15,6 +15,7 @@
         app:navigationIcon="@drawable/arrow_back">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/toolbar_title"
             style="@style/ToolbarTitleAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_layout_background"
                     android:singleLine="true"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:maxLines="1"
                     tools:ignore="VisualLintTextFieldSize" />
 

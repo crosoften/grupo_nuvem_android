@@ -2,7 +2,7 @@ package com.dnuv.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dnuv.data.model.request.addCamRequest.AddCamRequest
+import com.dnuv.data.model.request.camera.AddCamRequest
 import com.dnuv.data.model.response.addCamResponse.MessageResponse
 import com.dnuv.data.model.state.UiState
 import com.dnuv.data.repository.CameraRepository

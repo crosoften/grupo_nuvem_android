@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.dnuv.data.model.request.addCamRequest.AddCamRequest
+import com.dnuv.data.model.request.camera.AddCamRequest
 import com.dnuv.data.model.state.UiState
 import com.dnuv.databinding.FragmentAddCameraBinding
 import com.dnuv.ui.viewModel.AddCamViewModel
