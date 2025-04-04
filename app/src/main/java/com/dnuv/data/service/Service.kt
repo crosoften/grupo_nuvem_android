@@ -2,7 +2,8 @@ package com.dnuv.data.service
 
 import com.dnuv.data.model.RegisterModel
 import com.dnuv.data.model.request.Login
-import com.dnuv.data.model.request.addCamRequest.AddCamRequest
+import com.dnuv.data.model.request.camera.AddCamRequest
+import com.dnuv.data.model.request.camera.UpdateCameraRequest
 import com.dnuv.data.model.request.contactus.ContactUsRequest
 import com.dnuv.data.model.request.forgotOne.ForgotPasswordRequest
 import com.dnuv.data.model.request.forgotThree.ForgotThreeRequest
@@ -17,11 +18,14 @@ import com.dnuv.data.model.response.user.UserResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface Service {
@@ -84,11 +88,21 @@ interface Service {
     suspend fun updateUserProfile(
         @Body user: UpdateUserRequest
     ): Response<Unit>
+
     @Multipart
     @POST("v1/upload/standard")
     suspend fun uploadImage(
         @Part file: MultipartBody.Part
     ): Response<ImageUploadResponse>
+
+    @PUT("v1/mobile/cameras/{id}")
+    suspend fun updateCamera(
+        @Path("id") id: String,
+        @Body request: UpdateCameraRequest
+    ): Response<Unit>
+
+    @DELETE("v1/mobile/cameras/{id}")
+    suspend fun deleteCamera(@Path("id") id: String): Response<Unit>
 
 
 }

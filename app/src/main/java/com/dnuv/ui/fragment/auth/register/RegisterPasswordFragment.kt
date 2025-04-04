@@ -1,7 +1,9 @@
 package com.dnuv.ui.fragment.auth.register
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,20 +84,23 @@ class RegisterPasswordFragment : Fragment() {
     }
 
     private fun validation(){
+        Log.d(TAG, "validation: em validation em register")
 
         val password = binding.editPassword.text.toString()
         val passwordConfirm = binding.editConfPass.text.toString()
 
-        val finalPassword = password == passwordConfirm
 
         when {
-            password.isNotEmpty() -> {
-                binding.editPassword.error = null
+            password.isEmpty() -> {
+                binding.editPassword.error = "Campo vazio"
+
             }
-            passwordConfirm.isNotEmpty() -> {
-                binding.editConfPass.error = null
+            passwordConfirm.isEmpty() -> {
+                binding.editConfPass.error = "Campo vazio"
+
             }
             password == passwordConfirm -> {
+                Log.d(TAG, "validation: confirmou")
                 viewModel.forgotResetPassword(
                     ForgotThreeRequest(
                         code = args.code, password, passwordConfirm
@@ -103,7 +108,8 @@ class RegisterPasswordFragment : Fragment() {
                 )
             }
             else -> {
-                showError("Verifique se os campos estão preenchidos e tente novamente")
+                binding.editConfPass.error = null
+                binding.editPassword.error = null
             }
         }
     }

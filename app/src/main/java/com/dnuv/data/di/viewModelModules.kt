@@ -3,6 +3,7 @@ package com.dnuv.data.di
 import com.dnuv.ui.viewModel.AddCamViewModel
 import com.dnuv.ui.viewModel.CamerasViewModel
 import com.dnuv.ui.viewModel.ContactViewModel
+import com.dnuv.ui.viewModel.EditCameraViewModel
 import com.dnuv.ui.viewModel.FaqViewModel
 import com.dnuv.ui.viewModel.ForgotViewModel
 import com.dnuv.ui.viewModel.LoginViewModel
@@ -38,5 +39,8 @@ val viewModelModules = module {
     }
     viewModel {
         UserViewModel(get(), get())
+    }
+    viewModel {
+        EditCameraViewModel(get())
     }
 }
