@@ -85,7 +85,7 @@ class LiveCameraFragment : Fragment() {
 
         adapter.updateList(list)
         adapter.setListener(object : OnCameraClickListener {
-            override fun onClick(item: CameraModel) {
+            override fun onClick(item: CameraModel, position: Int) {
                 viewModel.setVideo(item.ip)
             }
         })

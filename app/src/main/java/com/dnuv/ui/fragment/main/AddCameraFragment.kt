@@ -1,9 +1,12 @@
 package com.dnuv.ui.fragment.main
 
+import android.R
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -14,6 +17,7 @@ import com.dnuv.ui.viewModel.AddCamViewModel
 import com.dnuv.ultils.Preference
 import com.dnuv.ultils.extensions.showError
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddCameraFragment : Fragment() {
@@ -21,6 +25,9 @@ class AddCameraFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModel<AddCamViewModel>()
     private lateinit var preferences: Preference
+    private lateinit var fabricantesJson: JSONObject
+    private var modelosAtuais: List<String> = emptyList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +42,48 @@ class AddCameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observe()
         setupToolbar()
+
+        fabricantesJson = loadRtspModelos(requireContext())
+
+        val fabricantes = fabricantesJson.keys().asSequence().toList()
+
+        val fabricanteAdapter = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, fabricantes)
+        binding.fabricanteDropdown.setAdapter(fabricanteAdapter)
+
+        binding.fabricanteDropdown.setOnItemClickListener { _, _, position, _ ->
+            val fabricanteSelecionado = fabricantes[position]
+            val fabricanteObj = fabricantesJson.getJSONObject(fabricanteSelecionado)
+
+            // Pega os modelos (chaves dentro do fabricante)
+            val modelos = fabricanteObj.keys().asSequence()
+                .filter { it != "" } // ignora o "" que é o default
+                .toList()
+
+            modelosAtuais = modelos // guarda pra usar depois
+
+            val modeloAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, modelos)
+            binding.modeloDropdown.setAdapter(modeloAdapter)
+        }
+
+        binding.modeloDropdown.setOnItemClickListener { _, _, position, _ ->
+            val fabricante = binding.fabricanteDropdown.text.toString()
+            val modelo = modelosAtuais[position]
+
+            val fabricanteObj = fabricantesJson.getJSONObject(fabricante)
+            val modeloObj = fabricanteObj.getJSONObject(modelo)
+            val video = modeloObj.getString("video")
+
+            val rtspUrl = video
+                .replace("{|username|", binding.username.text.toString())      // ou binding.username.text
+                .replace("{:|password|}", binding.password.text.toString())
+                .replace("{|host|}", binding.ipAddress.text.toString())
+                .replace("{:|port}", binding.rtspPort.text.toString())
+
+            binding.rtspUrl.setText(rtspUrl)
+        }
+
+
+
     }
 
     private fun observe() {
@@ -69,50 +118,44 @@ class AddCameraFragment : Fragment() {
 
         binding.addDeviceButton.setOnClickListener {
             val req = AddCamRequest(
-                camera = binding.camName.text.toString(),
+                camera = binding.fabricanteDropdown.text.toString(),
                 userId = preferences.getId(),
-                name = binding.camName.text.toString(),
-                ip = binding.externIpEdit.text.toString(),
+                name = binding.fabricanteDropdown.text.toString(),
+                ip = binding.ipAddress.text.toString(),
                 serialNumber = "12345678",
                 description = binding.editLocal.text.toString(),
-                password = "12345678"
+                password = binding.password.text.toString()
             )
 
             viewModel.addCamera(req)
         }
     }
 
+    private fun loadRtspModelos(context: Context): JSONObject {
+        val inputStream = context.assets.open("rtsp_modelos.json")
+        val size = inputStream.available()
+        val buffer = ByteArray(size)
+        inputStream.read(buffer)
+        inputStream.close()
+        val json = String(buffer, Charsets.UTF_8)
+        return JSONObject(json)
+    }
+
+
 //    private fun validation(){
 //
-//        val ip = binding.internIpEdit.text.toString()
-//        val serie = binding.serie.text.toString()
-//        val cam = binding.camera.text.toString()
+//        val ip = binding.ipAddress.text.toString()
+//        val serie = binding.modeloDropdown.text.toString()
+//        val cam = binding.fabricanteDropdown.text.toString()
 //        val password = binding.password.text.toString()
-//        val passwordAtual = binding.currentPassword.text.toString()
-//        val nome = binding.name.text.toString()
-//        val desc = binding.description.text.toString()
 //
 //        if (ip.isEmpty()){
 //           // Toast.makeText(requireContext(), "digite o ip", Toast.LENGTH_SHORT).show()
-//            binding.internIpEdit.error = "digite o ip"
+//            binding.ipAddress.error = "digite o ip"
 //        }else{
-//            binding.internIpEdit.error = null
+//            binding.ipAddress.error = null
 //        }
 //
-//        if (serie.isEmpty()){
-//           // Toast.makeText(requireContext(), "digite o numero de serie", Toast.LENGTH_SHORT).show()
-//            binding.serie.error = "digite o numero de serie"
-//        }else{
-//            binding.serie.error = null
-//        }
-//
-//        if (cam.isEmpty()){
-//
-//          //  Toast.makeText(requireContext(), "digite a camera", Toast.LENGTH_SHORT).show()
-//            binding.camera.error = "digite a camera"
-//        }else{
-//            binding.camera.error = null
-//        }
 //
 //        if (password.isEmpty()){
 //            binding.password.error = "digite sua senha"
@@ -120,30 +163,6 @@ class AddCameraFragment : Fragment() {
 //        }else{
 //            binding.password.error = null
 //        }
-//
-//        if (passwordAtual.isEmpty()){
-//            binding.currentPassword.error = "digite sua senha atual"
-//
-//        }else{
-//            binding.currentPassword.error = null
-//        }
-//
-//        if (nome.isEmpty()){
-//           // Toast.makeText(requireContext(), "digite o nome", Toast.LENGTH_SHORT).show()
-//            binding.name.error = "digite sua senha atual"
-//
-//        }else{
-//            binding.name.error = null
-//        }
-//
-//        if (desc.isEmpty()){
-//           // Toast.makeText(requireContext(), "digite uma Descrição", Toast.LENGTH_SHORT).show()
-//            binding.description.error = "digite uma Descrição"
-//
-//        }else{
-//            binding.description.error = null
-//        }
-//
 //
 //
 //        if ( binding.internIpEdit.error.isNullOrEmpty() && binding.serie.error.isNullOrEmpty() && binding.camera.error.isNullOrEmpty() && binding.password.error.isNullOrEmpty()
@@ -162,13 +181,12 @@ class AddCameraFragment : Fragment() {
 //            )
 //        }
 //    }
-//    private fun clearFields() {
-//        binding.internIpEdit.text?.clear()
-//        binding.serie.text?.clear()
-//        binding.camera.text?.clear()
-//        binding.password.text?.clear()
-//        binding.currentPassword.text?.clear()
-//        binding.name.text?.clear()
-//        binding.description.text?.clear()
-//    }
+    private fun clearFields() {
+        binding.ipAddress.text?.clear()
+        binding.rtspPort.text?.clear()
+        binding.streamDropdown.text?.clear()
+        binding.password.text?.clear()
+        binding.modeloDropdown.text?.clear()
+        binding.fabricanteDropdown.text?.clear()
+    }
 }

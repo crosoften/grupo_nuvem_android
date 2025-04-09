@@ -64,6 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/address"
             app:layout_constraintStart_toEndOf="@+id/img">
 
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/edit_button"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -86,6 +87,16 @@
                 tools:ignore="HardcodedText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/icon_not_working"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/icon_no_working"
+            android:contentDescription="@string/descricao_camera_inativa"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

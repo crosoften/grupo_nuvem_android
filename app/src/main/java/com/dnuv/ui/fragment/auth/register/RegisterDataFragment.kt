@@ -51,6 +51,8 @@ class RegisterDataFragment : Fragment() {
         handleImage()
         clickListeners()
         setupMask()
+        openTerms()
+        openPolitics()
     }
 
     private fun setupMask() {
@@ -137,6 +139,17 @@ class RegisterDataFragment : Fragment() {
             )
             viewModel.setRegisterData(register)
             findNavController().navigate(R.id.action_registerDataFragment_to_registerAdressFragment)
+        }
+    }
+
+    private fun openTerms(){
+        binding.tvTermos.setOnClickListener {
+            findNavController().navigate(R.id.termsFragment)
+        }
+    }
+    private fun openPolitics(){
+        binding.tvPolitic.setOnClickListener {
+            findNavController().navigate(R.id.politicFragment)
         }
     }
 

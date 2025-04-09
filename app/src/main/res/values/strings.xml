@@ -2,6 +2,9 @@
     <string name="app_name">Dnuv</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="editar_camera">EDITAR CAMERA</string>
+    <string name="descricao_camera_inativa">Ícone de câmera inativa</string>
+
     <string name="terms">
         Termos de serviços Directnuv
 
@@ -528,5 +531,4 @@ TOMOU AS MEDIDAS PARA CONSIDERAR SERIAMENTE AS CONSEQUÊNCIAS DESTE ACORDO, EM
 QUE SE COMPROMETE A FICAR OBRIGADO PELOS TERMOS E CONDIÇÕES DO ACORDO, E QUE É
 LEGALMENTE COMPETENTE PARA CELEBRAR ESTE ACORDO COM A DIRECTNUV.
     </string>
-    <string name="editar_camera">EDITAR CAMERA</string>
 </resources>

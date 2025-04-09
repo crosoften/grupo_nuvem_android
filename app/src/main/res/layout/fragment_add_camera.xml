@@ -37,59 +37,208 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="32dp">
 
+            <!-- Dentro de <LinearLayoutCompat ...> ou similar -->
+
+            <!-- Fabricante -->
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="IP externo (RTSP)"
+                android:text="Fabricante"
                 android:textColor="@color/gray"
                 style="@style/Poppins.Light"
-                android:textSize="15sp"/>
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:endIconMode="dropdown_menu"
+                android:layout_marginBottom="4dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/extern_ip_edit"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/fabricante_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_layout_background"
+                    android:inputType="none"
+                    android:hint="Selecione"
+                    android:background="@drawable/input_layout_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Modelo -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modelo"
+                android:textColor="@color/gray"
+                style="@style/Poppins.Light"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:endIconMode="dropdown_menu"
+                android:layout_marginBottom="4dp">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/modelo_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="Selecione"
+                    android:background="@drawable/input_layout_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Agora continua com os campos que já tínhamos... -->
+
+            <!-- DDNS ou IP Fixo -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DDNS ou IP Fixo"
+                android:textColor="@color/gray"
+                style="@style/Poppins.Light"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ip_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:inputType="number"
-                    android:maxLines="1"
-                    tools:ignore="VisualLintTextFieldSize" />
-
+                    android:background="@drawable/input_layout_background" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <!-- Porta RTSP -->
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome da câmera"
-                android:layout_marginTop="12dp"
+                android:text="Porta RTSP (geralmente é 554)"
                 android:textColor="@color/gray"
                 style="@style/Poppins.Light"
-                android:textSize="15sp"/>
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+                app:boxStrokeWidthFocused="0dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cam_name"
+                    android:id="@+id/rtsp_port"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_layout_background"
+                    android:inputType="number"
                     android:singleLine="true"
-                    tools:ignore="VisualLintTextFieldSize" />
-
+                    android:background="@drawable/input_layout_background" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Usuário -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usuário (Câmera/DVR)"
+                android:textColor="@color/gray"
+                style="@style/Poppins.Light"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:background="@drawable/input_layout_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Senha -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Senha (Câmera/DVR)"
+                android:textColor="@color/gray"
+                style="@style/Poppins.Light"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textPassword"
+                    android:background="@drawable/input_layout_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Stream -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stream (Câmera/DVR)"
+                android:textColor="@color/gray"
+                style="@style/Poppins.Light"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/stream_dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:hint="Selecionar"
+                android:background="@drawable/input_layout_background"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Canal -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Canal (Somente se DVR)"
+                android:textColor="@color/gray"
+                style="@style/Poppins.Light"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/channel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:background="@drawable/input_layout_background" />
+            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,107 +265,39 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-<!--            <com.google.android.material.textview.MaterialTextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Senha"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:textColor="@color/gray"-->
-<!--                style="@style/Poppins.Light"-->
-<!--                android:textSize="15sp"/>-->
+            <!-- URL RTSP -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Digitar URL RTSP (deixe em branco para o preenchimento automático)"
+                android:textColor="@color/gray"
+                style="@style/Poppins.Light"
+                android:layout_marginTop="12dp"
+                android:textSize="15sp" />
 
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:boxStrokeWidth="0dp"-->
-<!--                app:boxStrokeWidthFocused="0dp"-->
-<!--                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">-->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Obs: A URL RTSP deve começar com rtsp:// e conter a string de conexão completa."
+                android:textColor="@color/gray"
+                style="@style/Poppins.Light"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp" />
 
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/password"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@drawable/input_layout_background"-->
-<!--                    android:singleLine="true"-->
-<!--                    tools:ignore="VisualLintTextFieldSize" />-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
 
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--            <com.google.android.material.textview.MaterialTextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Senha atual"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:textColor="@color/gray"-->
-<!--                style="@style/Poppins.Light"-->
-<!--                android:textSize="15sp"/>-->
-
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:boxStrokeWidth="0dp"-->
-<!--                app:boxStrokeWidthFocused="0dp"-->
-<!--                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/current_password"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@drawable/input_layout_background"-->
-<!--                    android:singleLine="true"-->
-<!--                    tools:ignore="VisualLintTextFieldSize" />-->
-
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--            <com.google.android.material.textview.MaterialTextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Nomear"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:textColor="@color/gray"-->
-<!--                style="@style/Poppins.Light"-->
-<!--                android:textSize="15sp" />-->
-
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:boxStrokeWidth="0dp"-->
-<!--                app:boxStrokeWidthFocused="0dp"-->
-<!--                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/name"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@drawable/input_layout_background"-->
-<!--                    tools:ignore="VisualLintTextFieldSize" />-->
-
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--            <com.google.android.material.textview.MaterialTextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Descrição"-->
-<!--                android:layout_marginTop="12dp"-->
-<!--                android:textColor="@color/gray"-->
-<!--                style="@style/Poppins.Light"-->
-<!--                android:textSize="15sp"/>-->
-
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:boxStrokeWidth="0dp"-->
-<!--                app:boxStrokeWidthFocused="0dp"-->
-<!--                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/description"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="200dp"-->
-<!--                    android:background="@drawable/input_layout_background"-->
-<!--                    tools:ignore="VisualLintTextFieldSize" />-->
-
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rtsp_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:background="@drawable/input_layout_background" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/add_device_button"
@@ -235,8 +316,12 @@
                 android:text="CANCELAR"
                 tools:ignore="VisualLintButtonSize" />
 
+
+
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.core.widget.NestedScrollView>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

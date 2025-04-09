@@ -1,0 +1,26 @@
+{
+  "3S": {
+    "": {
+      "md": "3S",
+      "video": "rtsp://{|username|{:|password|}@}{|host|}{:|port}",
+      "video_medium": "rtsp://{|username|{:|password|}@}{|host|}"
+    },
+    "IP camera": {
+      "video": "rtsp://{|username|{:|password|}@}{|host|}{:|port}",
+      "models": [
+        "C8081", "C8082", "CF081", "CF082", "N1071", "N1",
+        "N6071", "N6072", "N8071", "N8072", "N9071", "S2071", "S407"
+      ]
+    }
+  },
+  "4XEM": {
+    "": {
+      "video": "rtsp://{|username|{:|password|}@}{|host|}{:|port}",
+      "models": [
+        "4X-FD7132", "DM38", "DMIR", "E103", "E103C", "E200DCV", "E200DI",
+        "E200DNCRV", "E200DNWV", "E200DPV", "IPCAMWL30", "IPCAMWPTS",
+        "IPCAMWPTZ", "W-2100", "W30", "W4", "WFDV", "WL40", "WL80", "WPT"
+      ]
+    }
+  }
+}

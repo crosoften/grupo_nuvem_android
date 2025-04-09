@@ -3,6 +3,8 @@ package com.dnuv.ui.fragment.main
 import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +34,7 @@ class CamerasFragment : Fragment() {
     private val userViewModel by activityViewModel<UserViewModel>()
     private val editCameraViewModel by activityViewModel<EditCameraViewModel>()
     private lateinit var preferences: Preference
+    private var originalCameraList: List<CameraModel> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +53,7 @@ class CamerasFragment : Fragment() {
         setupSelf()
         setupMosaicButton()
         viewModelObservers()
+        pesquisaNomeCamera()
     }
 
     private fun setupSelf() {
@@ -111,52 +115,69 @@ class CamerasFragment : Fragment() {
                 )
             )
         }
+        originalCameraList = list
 
         adapter.updateList(list)
-        adapter.setListener(object : OnCameraClickListener {
-            override fun onClick(item: CameraModel, position: Int) {
-                viewModel.setVideo(item.ip)
-                findNavController().navigate(
-                    CamerasFragmentDirections.actionCamerasFragmentToLiveCameraFragment(
-                        item.ip
-                    )
-                )
-            }
-        })
-        adapter.setClickToEditCamera(object : OnCameraClickListener {
-            override fun onClick(item: CameraModel, position: Int) {
-                editCameraViewModel.setCameraModel(item)
-                findNavController().navigate(
-                    R.id.editCameraFragment
-                )
-            }
-        })
-        adapter.setClickToExcludeCamera(object : OnCameraClickListener {
-            override fun onClick(item: CameraModel, position: Int) {
-                val id = item.id
 
-                AlertDialog.Builder(requireContext())
-                    .setTitle("Excluir Câmera")
-                    .setMessage("Tem certeza que deseja excluir esta câmera?")
-                    .setPositiveButton("Excluir") { _, _ ->
-                        editCameraViewModel.deleteCamera(id)
+        adapter.setOnItemClickListener { item, _ ->
+            viewModel.setVideo(item.ip)
+            findNavController().navigate(
+                CamerasFragmentDirections.actionCamerasFragmentToLiveCameraFragment(item.ip)
+            )
+        }
 
-                        editCameraViewModel.deleteStatus.observe(viewLifecycleOwner) { result ->
-                            result.onSuccess {
-                                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                                adapter.notifyItemRemoved(position)
-                                val updatedList = adapter.getCurrentList().filter { it.id != id }
-                                adapter.updateList(updatedList)
-                            }.onFailure {
-                                Toast.makeText(requireContext(), "Erro: ${it.message}", Toast.LENGTH_SHORT).show()
-                            }
+        adapter.setOnEditClickListener { item, _ ->
+            editCameraViewModel.setCameraModel(item)
+            findNavController().navigate(R.id.editCameraFragment)
+        }
+
+        adapter.setOnDeleteClickListener { item, position ->
+            val id = item.id
+
+            AlertDialog.Builder(requireContext())
+                .setTitle("Excluir Câmera")
+                .setMessage("Tem certeza que deseja excluir esta câmera?")
+                .setPositiveButton("Excluir") { _, _ ->
+                    editCameraViewModel.deleteCamera(id)
+
+                    editCameraViewModel.deleteStatus.observe(viewLifecycleOwner) { result ->
+                        result.onSuccess {
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                            val updatedList = adapter.getCurrentList().filter { it.id != id }
+                            adapter.updateList(updatedList)
+                        }.onFailure {
+                            Toast.makeText(requireContext(), "Erro: ${it.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    .setNegativeButton("Cancelar", null)
-                    .show()
+                }
+                .setNegativeButton("Cancelar", null)
+                .show()
+        }
 
+    }
 
+    private fun pesquisaNomeCamera(){
+        binding.searchBar.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString().trim().lowercase()
+                val filteredList = originalCameraList.filter { it.name.lowercase().contains(query) }
+
+                adapter.updateList(filteredList)
+
+                // Se a lista filtrada estiver vazia, mostre uma mensagem
+                if (filteredList.isEmpty()) {
+                    binding.tvEmpty.text = "Nenhuma câmera encontrada"
+                    binding.tvEmpty.visibility = View.VISIBLE
+                    binding.camerasRecyclerview.visibility = View.GONE
+                } else {
+                    binding.tvEmpty.visibility = View.GONE
+                    binding.camerasRecyclerview.visibility = View.VISIBLE
+                }
             }
+
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 

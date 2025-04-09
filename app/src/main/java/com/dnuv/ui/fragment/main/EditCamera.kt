@@ -35,45 +35,45 @@ class EditCamera: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onCLick()
-        observe()
+//        onCLick()
+//        observe()
 
 
     }
-    private fun observe(){
-        viewModel.cameraModel.observe(viewLifecycleOwner) { model ->
-            binding.editLocal.setText(model.address)
-            binding.externIpEdit.setText(model.ip)
-            binding.camName.setText(model.name)
-            Log.d(TAG, "onViewCreated: ${model.id}")
-        }
-
-
-    }
-    private fun onCLick(){
-        binding.addDeviceButton.setOnClickListener {
-            val id = viewModel.cameraModel.value?.id ?: return@setOnClickListener
-
-            val updatedCamera = UpdateCameraRequest(
-                ip = binding.externIpEdit.text.toString(),
-                serialNumber = "123456", // Se precisar de serial
-                camera = "Minha câmera", // Se precisar desse campo
-                name = binding.camName.text.toString(),
-                description = binding.editLocal.text.toString()
-            )
-
-            viewModel.updateCamera(id, updatedCamera)
-            viewModel.updateStatus.observe(viewLifecycleOwner) { result ->
-                result.onSuccess {
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
-                }.onFailure {
-                    Toast.makeText(requireContext(), "Erro: ${it.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-
-        }
-
-    }
+//    private fun observe(){
+//        viewModel.cameraModel.observe(viewLifecycleOwner) { model ->
+//            binding.editLocal.setText(model.address)
+//            binding.externIpEdit.setText(model.ip)
+//            binding.camName.setText(model.name)
+//            Log.d(TAG, "onViewCreated: ${model.id}")
+//        }
+//
+//
+//    }
+//    private fun onCLick(){
+//        binding.addDeviceButton.setOnClickListener {
+//            val id = viewModel.cameraModel.value?.id ?: return@setOnClickListener
+//
+//            val updatedCamera = UpdateCameraRequest(
+//                ip = binding.externIpEdit.text.toString(),
+//                serialNumber = "123456", // Se precisar de serial
+//                camera = "Minha câmera", // Se precisar desse campo
+//                name = binding.camName.text.toString(),
+//                description = binding.editLocal.text.toString()
+//            )
+//
+//            viewModel.updateCamera(id, updatedCamera)
+//            viewModel.updateStatus.observe(viewLifecycleOwner) { result ->
+//                result.onSuccess {
+//                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+//                    findNavController().popBackStack()
+//                }.onFailure {
+//                    Toast.makeText(requireContext(), "Erro: ${it.message}", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//
+//        }
+//
+//    }
 }

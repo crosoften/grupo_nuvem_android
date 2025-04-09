@@ -88,6 +88,7 @@ class EditData: Fragment() {
             )
         )
     }
+
     private fun validateFields(): Boolean {
         var isValid = true
 
@@ -129,11 +130,12 @@ class EditData: Fragment() {
     private fun validate() {
         if (validateFields()) {
             viewModel.viewModelScope.launch {
+                Log.d(TAG, "validate: ${binding.editTelefone.text.toString()}")
                 val userRequest = UpdateUserRequest(
                     name = binding.editName.text.toString(),
                     email = binding.editEmail.text.toString(),
-                    document = binding.editCnpj.text.toString(),
-                    phone = binding.editTelefone.text.toString()
+                    document = MaskEditUtil.unmask(binding.editCnpj.text.toString()),
+                    phone = MaskEditUtil.unmask(binding.editTelefone.text.toString())
                 )
                 viewModel.uploadAndUpdateUserProfile(userRequest, binding.root.context)
             }

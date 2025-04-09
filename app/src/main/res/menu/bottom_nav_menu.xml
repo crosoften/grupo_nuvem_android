@@ -12,7 +12,7 @@
         android:title="Vídeos"/>
     <item
         android:id="@+id/addCameraFragment"
-        android:icon="@drawable/add_icon"
+        android:icon="@drawable/add"
         android:title="Adicionar"/>
     <item
         android:id="@+id/profileFragment"
