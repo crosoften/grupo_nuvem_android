@@ -52,7 +52,7 @@ class RecoverCodeFragment : Fragment() {
                 when(state){
                     is UiState.Error -> {
                         val errorMessage = when {
-                            state.message.contains("404", ignoreCase = true) -> "Código inválido ou expirado"
+                            state.message.contains("404", ignoreCase = true) -> "Codigo de recuperação incorreto"
                             state.message.contains("400", ignoreCase = true) -> "Código incorreto. Tente novamente"
                             state.message.contains("429", ignoreCase = true) -> "Muitas tentativas. Aguarde um momento"
                             state.message.contains("500", ignoreCase = true) -> "Erro no servidor. Tente novamente mais tarde"

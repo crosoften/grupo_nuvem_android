@@ -54,7 +54,7 @@ class RecoverPassWordFragment : Fragment() {
                 when(state) {
                     is UiState.Error -> {
                         val errorMessage = when {
-                        state.message.contains("404", ignoreCase = true) -> "Usuário não encontrado"
+                        state.message.contains("404", ignoreCase = true) -> "Codigo de recuperação incorreto"
                         state.message.contains("400", ignoreCase = true) -> "Requisição inválida"
                         state.message.contains("401", ignoreCase = true) -> "Acesso não autorizado"
                         state.message.contains(
@@ -115,7 +115,7 @@ class RecoverPassWordFragment : Fragment() {
                 )
             }
             finalPassword && password.length < 8 -> {
-                showError("Ops! A senha precisa ser igual ou maior que 8 caracteres")
+                showError("Escolha uma senha com 8 ou mais caracteres")
             }
             else -> {
                 showError("Ops! As senhas não são iguais. Digite novamente")
