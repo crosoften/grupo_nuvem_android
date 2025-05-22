@@ -58,7 +58,7 @@ class EditData: Fragment() {
         viewModel.userData.observe(viewLifecycleOwner) { user ->
             user?.let {
                 binding.editName.setText(it.name)
-                binding.editCnpj.setText(it.document)
+                binding.editCpf.setText(it.document)
                 binding.editTelefone.setText(it.phone)
                 binding.editEmail.setText(it.email)
                 Glide.with(requireContext())
@@ -76,8 +76,8 @@ class EditData: Fragment() {
     private fun setupMask() {
         binding.editCnpj.addTextChangedListener(
             MaskEditUtil.mask(
-                binding.editCnpj,
-                MaskEditUtil.FORMAT_CNPJ
+                binding.editCpf,
+                MaskEditUtil.FORMAT_CPF
             )
         )
 
@@ -118,10 +118,10 @@ class EditData: Fragment() {
 
         val document = binding.editCnpj.text.toString().trim()
         if (document.isEmpty()) {
-            binding.editCnpj.error = "CNPJ é obrigatório"
+            binding.editCnpj.error = "CPF é obrigatório"
             isValid = false
         } else if (!document.isValidCNPJ()) {
-            binding.editCnpj.error = "CNPJ inválido"
+            binding.editCnpj.error = "CPF inválido"
             isValid = false
         }
 

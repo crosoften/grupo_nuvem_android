@@ -3,20 +3,10 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="app">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\Arthur\.android\avd\Pixel_3_XL_API_30.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-03T04:48:39.035239Z" />
-        </State>
+        <State />
+      </entry>
+      <entry key="nuvem">
+        <State />
       </entry>
     </value>
   </component>
