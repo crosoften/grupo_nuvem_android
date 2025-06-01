@@ -58,7 +58,7 @@ class EditData: Fragment() {
         viewModel.userData.observe(viewLifecycleOwner) { user ->
             user?.let {
                 binding.editName.setText(it.name)
-                binding.editCpf.setText(it.document)
+                binding.editCnpj.setText(it.document)
                 binding.editTelefone.setText(it.phone)
                 binding.editEmail.setText(it.email)
                 Glide.with(requireContext())
@@ -76,7 +76,7 @@ class EditData: Fragment() {
     private fun setupMask() {
         binding.editCnpj.addTextChangedListener(
             MaskEditUtil.mask(
-                binding.editCpf,
+                binding.editCnpj,
                 MaskEditUtil.FORMAT_CPF
             )
         )
